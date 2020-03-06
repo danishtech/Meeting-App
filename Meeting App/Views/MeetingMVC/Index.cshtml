@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Meeting_App.Models.Meeting>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.project_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Meeting_Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Meeting_objective)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Agenda)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Agenda_SubItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MeetingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MeetingTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MeetingAssignedTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.reoccrence)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Meeting_Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Partipatents)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Share_Link)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.project_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Meeting_Subject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Meeting_objective)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Agenda)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Agenda_SubItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MeetingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MeetingTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MeetingAssignedTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.reoccrence)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Meeting_Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Partipatents)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Share_Link)
+        </td>
+        <td >
+            @Html.ActionLink("Edit", "Edit", new { id=item.MeetingID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MeetingID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MeetingID })
+        </td>
+    </tr>
+}
+
+</table>

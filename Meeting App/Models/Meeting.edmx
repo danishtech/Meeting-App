@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Action Item">
+          <Key>
+            <PropertyRef Name="ActionItemID" />
+          </Key>
+          <Property Name="ActionItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActionItem Title" Type="varchar" MaxLength="500" />
+          <Property Name="project Name" Type="varchar" MaxLength="500" />
+          <Property Name="ActionDate" Type="varchar" MaxLength="50" />
+          <Property Name="ActionTime" Type="varchar" MaxLength="50" />
+          <Property Name="ActionAssignedTo" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Decision Item">
+          <Key>
+            <PropertyRef Name="DecisionItemID" />
+          </Key>
+          <Property Name="DecisionItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DecisionItem Title" Type="varchar" MaxLength="500" />
+          <Property Name="project Name" Type="varchar" MaxLength="500" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="DecisionDate" Type="varchar" MaxLength="50" />
+          <Property Name="DecisionTime" Type="varchar" MaxLength="50" />
+          <Property Name="DecisionAssignedTo" Type="varchar" MaxLength="500" />
+          <Property Name="Priority" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Meeting">
+          <Key>
+            <PropertyRef Name="MeetingID" />
+          </Key>
+          <Property Name="MeetingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project Name" Type="varchar" MaxLength="500" />
+          <Property Name="Meeting Subject" Type="varchar" MaxLength="500" />
+          <Property Name="Meeting objective" Type="varchar(max)" />
+          <Property Name="Agenda" Type="varchar(max)" />
+          <Property Name="Agenda SubItem" Type="varchar(max)" />
+          <Property Name="MeetingDate" Type="varchar" MaxLength="50" />
+          <Property Name="MeetingTime" Type="varchar" MaxLength="50" />
+          <Property Name="MeetingAssignedTo" Type="varchar" MaxLength="500" />
+          <Property Name="reoccrence" Type="varchar" MaxLength="50" />
+          <Property Name="Meeting Location" Type="varchar" MaxLength="500" />
+          <Property Name="Partipatents" Type="varchar" MaxLength="500" />
+          <Property Name="Share Link" Type="varchar(max)" />
+        </EntityType>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Action Item" EntityType="Self.Action Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Decision Item" EntityType="Self.Decision Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meeting" EntityType="Self.Meeting" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Action_Item">
+          <Key>
+            <PropertyRef Name="ActionItemID" />
+          </Key>
+          <Property Name="ActionItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActionItem_Title" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="project_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ActionDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActionTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActionAssignedTo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Decision_Item">
+          <Key>
+            <PropertyRef Name="DecisionItemID" />
+          </Key>
+          <Property Name="DecisionItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DecisionItem_Title" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="project_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DecisionDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DecisionTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DecisionAssignedTo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Priority" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Meeting">
+          <Key>
+            <PropertyRef Name="MeetingID" />
+          </Key>
+          <Property Name="MeetingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Meeting_Subject" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Meeting_objective" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Agenda" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Agenda_SubItem" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MeetingDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MeetingTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MeetingAssignedTo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="reoccrence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Meeting_Location" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Partipatents" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Share_Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="Meeting_AppEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Action_Items" EntityType="Self.Action_Item" />
+          <EntitySet Name="Decision_Items" EntityType="Self.Decision_Item" />
+          <EntitySet Name="Meetings" EntityType="Self.Meeting" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Meeting_AppEntities">
+          <EntitySetMapping Name="Action_Items">
+            <EntityTypeMapping TypeName="Model.Action_Item">
+              <MappingFragment StoreEntitySet="Action Item">
+                <ScalarProperty Name="ActionItemID" ColumnName="ActionItemID" />
+                <ScalarProperty Name="ActionItem_Title" ColumnName="ActionItem Title" />
+                <ScalarProperty Name="project_Name" ColumnName="project Name" />
+                <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
+                <ScalarProperty Name="ActionTime" ColumnName="ActionTime" />
+                <ScalarProperty Name="ActionAssignedTo" ColumnName="ActionAssignedTo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Decision_Items">
+            <EntityTypeMapping TypeName="Model.Decision_Item">
+              <MappingFragment StoreEntitySet="Decision Item">
+                <ScalarProperty Name="DecisionItemID" ColumnName="DecisionItemID" />
+                <ScalarProperty Name="DecisionItem_Title" ColumnName="DecisionItem Title" />
+                <ScalarProperty Name="project_Name" ColumnName="project Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DecisionDate" ColumnName="DecisionDate" />
+                <ScalarProperty Name="DecisionTime" ColumnName="DecisionTime" />
+                <ScalarProperty Name="DecisionAssignedTo" ColumnName="DecisionAssignedTo" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meetings">
+            <EntityTypeMapping TypeName="Model.Meeting">
+              <MappingFragment StoreEntitySet="Meeting">
+                <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
+                <ScalarProperty Name="project_Name" ColumnName="project Name" />
+                <ScalarProperty Name="Meeting_Subject" ColumnName="Meeting Subject" />
+                <ScalarProperty Name="Meeting_objective" ColumnName="Meeting objective" />
+                <ScalarProperty Name="Agenda" ColumnName="Agenda" />
+                <ScalarProperty Name="Agenda_SubItem" ColumnName="Agenda SubItem" />
+                <ScalarProperty Name="MeetingDate" ColumnName="MeetingDate" />
+                <ScalarProperty Name="MeetingTime" ColumnName="MeetingTime" />
+                <ScalarProperty Name="MeetingAssignedTo" ColumnName="MeetingAssignedTo" />
+                <ScalarProperty Name="reoccrence" ColumnName="reoccrence" />
+                <ScalarProperty Name="Meeting_Location" ColumnName="Meeting Location" />
+                <ScalarProperty Name="Partipatents" ColumnName="Partipatents" />
+                <ScalarProperty Name="Share_Link" ColumnName="Share Link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

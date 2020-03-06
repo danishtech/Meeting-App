@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Meeting_App.Models.Action_Item>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ActionItem_Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.project_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActionTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActionAssignedTo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActionItem_Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.project_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActionDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActionTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActionAssignedTo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ActionItemID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ActionItemID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ActionItemID })
+        </td>
+    </tr>
+}
+
+</table>
