@@ -1,0 +1,42 @@
+﻿@model Meeting_App.Models.PollOption
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PollOption</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Answers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Answers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Poll.Question)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Poll.Question)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PollOptionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

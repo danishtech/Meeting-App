@@ -11,10 +11,45 @@
           </Key>
           <Property Name="ActionItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ActionItem Title" Type="varchar" MaxLength="500" />
+          <Property Name="Action Description" Type="varchar(max)" />
           <Property Name="project Name" Type="varchar" MaxLength="500" />
-          <Property Name="ActionDate" Type="varchar" MaxLength="50" />
+          <Property Name="ActionDate" Type="datetime" />
           <Property Name="ActionTime" Type="varchar" MaxLength="50" />
           <Property Name="ActionAssignedTo" Type="varchar" MaxLength="500" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Priority" Type="varchar" MaxLength="50" />
+          <Property Name="MeetingID" Type="int" />
+        </EntityType>
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="AppUserID" />
+          </Key>
+          <Property Name="AppUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Initials" Type="varchar" MaxLength="50" />
+          <Property Name="Prefix" Type="varchar" MaxLength="20" />
+          <Property Name="Suffix" Type="varchar" MaxLength="20" />
+          <Property Name="LoginName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="DisabledDate" Type="datetime" />
+          <Property Name="LoginAttemptsCount" Type="int" />
+          <Property Name="AgreedToLicenseDate" Type="datetime" />
+          <Property Name="SpecialOption" Type="varchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="CellPhone" Type="varchar" MaxLength="50" />
+          <Property Name="Fax" Type="varchar" MaxLength="20" />
+          <Property Name="AppUserNote" Type="varchar" MaxLength="1000" />
+          <Property Name="SortNameFirstLast" Type="varchar" MaxLength="101" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="SortNameLastFirst" Type="varchar" MaxLength="102" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="141" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CreatedByID" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByID" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="Decision Item">
           <Key>
@@ -24,10 +59,12 @@
           <Property Name="DecisionItem Title" Type="varchar" MaxLength="500" />
           <Property Name="project Name" Type="varchar" MaxLength="500" />
           <Property Name="Description" Type="varchar" MaxLength="500" />
-          <Property Name="DecisionDate" Type="varchar" MaxLength="50" />
+          <Property Name="DecisionDate" Type="datetime" />
           <Property Name="DecisionTime" Type="varchar" MaxLength="50" />
           <Property Name="DecisionAssignedTo" Type="varchar" MaxLength="500" />
           <Property Name="Priority" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+          <Property Name="MeetingID" Type="int" />
         </EntityType>
         <EntityType Name="Meeting">
           <Key>
@@ -39,18 +76,89 @@
           <Property Name="Meeting objective" Type="varchar(max)" />
           <Property Name="Agenda" Type="varchar(max)" />
           <Property Name="Agenda SubItem" Type="varchar(max)" />
-          <Property Name="MeetingDate" Type="varchar" MaxLength="50" />
+          <Property Name="MeetingDate" Type="datetime" />
           <Property Name="MeetingTime" Type="varchar" MaxLength="50" />
           <Property Name="MeetingAssignedTo" Type="varchar" MaxLength="500" />
           <Property Name="reoccrence" Type="varchar" MaxLength="50" />
           <Property Name="Meeting Location" Type="varchar" MaxLength="500" />
           <Property Name="Partipatents" Type="varchar" MaxLength="500" />
           <Property Name="Share Link" Type="varchar(max)" />
+          <Property Name="Status" Type="int" />
         </EntityType>
+        <EntityType Name="Poll">
+          <Key>
+            <PropertyRef Name="PollID" />
+          </Key>
+          <Property Name="PollID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Polldate" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="options" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PollOption">
+          <Key>
+            <PropertyRef Name="PollOptionID" />
+          </Key>
+          <Property Name="PollOptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PollID" Type="int" Nullable="false" />
+          <Property Name="Answers" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Vote" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Action Item_Meeting">
+          <End Role="Meeting" Type="Self.Meeting" Multiplicity="0..1" />
+          <End Role="Action Item" Type="Self.Action Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meeting">
+              <PropertyRef Name="MeetingID" />
+            </Principal>
+            <Dependent Role="Action Item">
+              <PropertyRef Name="MeetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Decision Item_Meeting">
+          <End Role="Meeting" Type="Self.Meeting" Multiplicity="0..1" />
+          <End Role="Decision Item" Type="Self.Decision Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meeting">
+              <PropertyRef Name="MeetingID" />
+            </Principal>
+            <Dependent Role="Decision Item">
+              <PropertyRef Name="MeetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PollOption_PollOption">
+          <End Role="Poll" Type="Self.Poll" Multiplicity="1" />
+          <End Role="PollOption" Type="Self.PollOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poll">
+              <PropertyRef Name="PollID" />
+            </Principal>
+            <Dependent Role="PollOption">
+              <PropertyRef Name="PollID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Action Item" EntityType="Self.Action Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppUser" EntityType="Self.AppUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Decision Item" EntityType="Self.Decision Item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Meeting" EntityType="Self.Meeting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Poll" EntityType="Self.Poll" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PollOption" EntityType="Self.PollOption" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Action Item_Meeting" Association="Self.FK_Action Item_Meeting">
+            <End Role="Meeting" EntitySet="Meeting" />
+            <End Role="Action Item" EntitySet="Action Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Decision Item_Meeting" Association="Self.FK_Decision Item_Meeting">
+            <End Role="Meeting" EntitySet="Meeting" />
+            <End Role="Decision Item" EntitySet="Decision Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PollOption_PollOption" Association="Self.FK_PollOption_PollOption">
+            <End Role="Poll" EntitySet="Poll" />
+            <End Role="PollOption" EntitySet="PollOption" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -63,10 +171,46 @@
           </Key>
           <Property Name="ActionItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ActionItem_Title" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Action_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="project_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="ActionDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActionDate" Type="DateTime" Precision="3" />
           <Property Name="ActionTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ActionAssignedTo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Priority" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MeetingID" Type="Int32" />
+          <NavigationProperty Name="Meeting" Relationship="Self.FK_Action_Item_Meeting" FromRole="Action_Item" ToRole="Meeting" />
+        </EntityType>
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="AppUserID" />
+          </Key>
+          <Property Name="AppUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Initials" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prefix" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Suffix" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LoginName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DisabledDate" Type="DateTime" Precision="3" />
+          <Property Name="LoginAttemptsCount" Type="Int32" />
+          <Property Name="AgreedToLicenseDate" Type="DateTime" Precision="3" />
+          <Property Name="SpecialOption" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CellPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AppUserNote" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="SortNameFirstLast" Type="String" MaxLength="101" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SortNameLastFirst" Type="String" MaxLength="102" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="DisplayName" Type="String" MaxLength="141" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedByID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByID" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="7" />
         </EntityType>
         <EntityType Name="Decision_Item">
           <Key>
@@ -76,10 +220,13 @@
           <Property Name="DecisionItem_Title" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="project_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="DecisionDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DecisionDate" Type="DateTime" Precision="3" />
           <Property Name="DecisionTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DecisionAssignedTo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Priority" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="MeetingID" Type="Int32" />
+          <NavigationProperty Name="Meeting" Relationship="Self.FK_Decision_Item_Meeting" FromRole="Decision_Item" ToRole="Meeting" />
         </EntityType>
         <EntityType Name="Meeting">
           <Key>
@@ -91,18 +238,93 @@
           <Property Name="Meeting_objective" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Agenda" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Agenda_SubItem" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="MeetingDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MeetingDate" Type="DateTime" Precision="3" />
           <Property Name="MeetingTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MeetingAssignedTo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="reoccrence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Meeting_Location" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Partipatents" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Share_Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Action_Item" Relationship="Self.FK_Action_Item_Meeting" FromRole="Meeting" ToRole="Action_Item" />
+          <NavigationProperty Name="Decision_Item" Relationship="Self.FK_Decision_Item_Meeting" FromRole="Meeting" ToRole="Decision_Item" />
         </EntityType>
+        <EntityType Name="Poll">
+          <Key>
+            <PropertyRef Name="PollID" />
+          </Key>
+          <Property Name="PollID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Polldate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="options" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PollOptions" Relationship="Self.FK_PollOption_PollOption" FromRole="Poll" ToRole="PollOption" />
+        </EntityType>
+        <EntityType Name="PollOption">
+          <Key>
+            <PropertyRef Name="PollOptionID" />
+          </Key>
+          <Property Name="PollOptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PollID" Type="Int32" Nullable="false" />
+          <Property Name="Answers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Vote" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Poll" Relationship="Self.FK_PollOption_PollOption" FromRole="PollOption" ToRole="Poll" />
+        </EntityType>
+        <Association Name="FK_Action_Item_Meeting">
+          <End Role="Meeting" Type="Self.Meeting" Multiplicity="0..1" />
+          <End Role="Action_Item" Type="Self.Action_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meeting">
+              <PropertyRef Name="MeetingID" />
+            </Principal>
+            <Dependent Role="Action_Item">
+              <PropertyRef Name="MeetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Decision_Item_Meeting">
+          <End Role="Meeting" Type="Self.Meeting" Multiplicity="0..1" />
+          <End Role="Decision_Item" Type="Self.Decision_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meeting">
+              <PropertyRef Name="MeetingID" />
+            </Principal>
+            <Dependent Role="Decision_Item">
+              <PropertyRef Name="MeetingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PollOption_PollOption">
+          <End Role="Poll" Type="Self.Poll" Multiplicity="1" />
+          <End Role="PollOption" Type="Self.PollOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poll">
+              <PropertyRef Name="PollID" />
+            </Principal>
+            <Dependent Role="PollOption">
+              <PropertyRef Name="PollID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Meeting_AppEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Action_Items" EntityType="Self.Action_Item" />
+          <EntitySet Name="AppUsers" EntityType="Self.AppUser" />
           <EntitySet Name="Decision_Items" EntityType="Self.Decision_Item" />
           <EntitySet Name="Meetings" EntityType="Self.Meeting" />
+          <EntitySet Name="Polls" EntityType="Self.Poll" />
+          <EntitySet Name="PollOptions" EntityType="Self.PollOption" />
+          <AssociationSet Name="FK_Action_Item_Meeting" Association="Self.FK_Action_Item_Meeting">
+            <End Role="Meeting" EntitySet="Meetings" />
+            <End Role="Action_Item" EntitySet="Action_Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Decision_Item_Meeting" Association="Self.FK_Decision_Item_Meeting">
+            <End Role="Meeting" EntitySet="Meetings" />
+            <End Role="Decision_Item" EntitySet="Decision_Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PollOption_PollOption" Association="Self.FK_PollOption_PollOption">
+            <End Role="Poll" EntitySet="Polls" />
+            <End Role="PollOption" EntitySet="PollOptions" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -115,10 +337,46 @@
               <MappingFragment StoreEntitySet="Action Item">
                 <ScalarProperty Name="ActionItemID" ColumnName="ActionItemID" />
                 <ScalarProperty Name="ActionItem_Title" ColumnName="ActionItem Title" />
+                <ScalarProperty Name="Action_Description" ColumnName="Action Description" />
                 <ScalarProperty Name="project_Name" ColumnName="project Name" />
                 <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
                 <ScalarProperty Name="ActionTime" ColumnName="ActionTime" />
                 <ScalarProperty Name="ActionAssignedTo" ColumnName="ActionAssignedTo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppUsers">
+            <EntityTypeMapping TypeName="Model.AppUser">
+              <MappingFragment StoreEntitySet="AppUser">
+                <ScalarProperty Name="AppUserID" ColumnName="AppUserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Initials" ColumnName="Initials" />
+                <ScalarProperty Name="Prefix" ColumnName="Prefix" />
+                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DisabledDate" ColumnName="DisabledDate" />
+                <ScalarProperty Name="LoginAttemptsCount" ColumnName="LoginAttemptsCount" />
+                <ScalarProperty Name="AgreedToLicenseDate" ColumnName="AgreedToLicenseDate" />
+                <ScalarProperty Name="SpecialOption" ColumnName="SpecialOption" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="AppUserNote" ColumnName="AppUserNote" />
+                <ScalarProperty Name="SortNameFirstLast" ColumnName="SortNameFirstLast" />
+                <ScalarProperty Name="SortNameLastFirst" ColumnName="SortNameLastFirst" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByID" ColumnName="ModifiedByID" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -133,6 +391,8 @@
                 <ScalarProperty Name="DecisionTime" ColumnName="DecisionTime" />
                 <ScalarProperty Name="DecisionAssignedTo" ColumnName="DecisionAssignedTo" />
                 <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -152,6 +412,28 @@
                 <ScalarProperty Name="Meeting_Location" ColumnName="Meeting Location" />
                 <ScalarProperty Name="Partipatents" ColumnName="Partipatents" />
                 <ScalarProperty Name="Share_Link" ColumnName="Share Link" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Polls">
+            <EntityTypeMapping TypeName="Model.Poll">
+              <MappingFragment StoreEntitySet="Poll">
+                <ScalarProperty Name="PollID" ColumnName="PollID" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Polldate" ColumnName="Polldate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="options" ColumnName="options" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PollOptions">
+            <EntityTypeMapping TypeName="Model.PollOption">
+              <MappingFragment StoreEntitySet="PollOption">
+                <ScalarProperty Name="PollOptionID" ColumnName="PollOptionID" />
+                <ScalarProperty Name="PollID" ColumnName="PollID" />
+                <ScalarProperty Name="Answers" ColumnName="Answers" />
+                <ScalarProperty Name="Vote" ColumnName="Vote" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -17,11 +17,13 @@ namespace Meeting_App.Controllers
         private Meeting_AppEntities db = new Meeting_AppEntities();
 
         // GET: api/Decision
+        [HttpGet]
         public IQueryable<Decision_Item> GetDecision_Items()
         {
+            db.Configuration.ProxyCreationEnabled = false;
             return db.Decision_Items;
         }
-
+        [HttpGet]
         // GET: api/Decision/5
         [ResponseType(typeof(Decision_Item))]
         public IHttpActionResult GetDecision_Item(int id)
@@ -34,7 +36,7 @@ namespace Meeting_App.Controllers
 
             return Ok(decision_Item);
         }
-
+        [HttpPut]
         // PUT: api/Decision/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutDecision_Item(int id, Decision_Item decision_Item)
@@ -69,7 +71,7 @@ namespace Meeting_App.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        [HttpPost]
         // POST: api/Decision
         [ResponseType(typeof(Decision_Item))]
         public IHttpActionResult PostDecision_Item(Decision_Item decision_Item)

@@ -10,107 +10,107 @@ using Meeting_App.Models;
 
 namespace Meeting_App.Controllers
 {
-    public class DecisionMVCController : Controller
+    public class UserMVCController : Controller
     {
         private Meeting_AppEntities db = new Meeting_AppEntities();
 
-        // GET: DecisionMVC
+        // GET: UserMVC
         public ActionResult Index()
         {
-            return View(db.Decision_Items.ToList());
+            return View(db.AppUsers.ToList());
         }
 
-        // GET: DecisionMVC/Details/5
+        // GET: UserMVC/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Decision_Item decision_Item = db.Decision_Items.Find(id);
-            if (decision_Item == null)
+            AppUser appUser = db.AppUsers.Find(id);
+            if (appUser == null)
             {
                 return HttpNotFound();
             }
-            return View(decision_Item);
+            return View(appUser);
         }
 
-        // GET: DecisionMVC/Create
+        // GET: UserMVC/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: DecisionMVC/Create
+        // POST: UserMVC/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DecisionItemID,DecisionItem_Title,project_Name,Description,DecisionDate,DecisionTime,DecisionAssignedTo,Priority")] Decision_Item decision_Item)
+        public ActionResult Create([Bind(Include = "AppUserID,FirstName,MiddleName,LastName,Initials,Prefix,Suffix,LoginName,Password,DisabledDate,LoginAttemptsCount,AgreedToLicenseDate,SpecialOption,IsActive,Email,Phone,CellPhone,Fax,AppUserNote,SortNameFirstLast,SortNameLastFirst,DisplayName,CreatedByID,CreatedDate,ModifiedByID,ModifiedDate")] AppUser appUser)
         {
             if (ModelState.IsValid)
             {
-                db.Decision_Items.Add(decision_Item);
+                db.AppUsers.Add(appUser);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(decision_Item);
+            return View(appUser);
         }
 
-        // GET: DecisionMVC/Edit/5
+        // GET: UserMVC/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Decision_Item decision_Item = db.Decision_Items.Find(id);
-            if (decision_Item == null)
+            AppUser appUser = db.AppUsers.Find(id);
+            if (appUser == null)
             {
                 return HttpNotFound();
             }
-            return View(decision_Item);
+            return View(appUser);
         }
 
-        // POST: DecisionMVC/Edit/5
+        // POST: UserMVC/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DecisionItemID,DecisionItem_Title,project_Name,Description,DecisionDate,DecisionTime,DecisionAssignedTo,Priority")] Decision_Item decision_Item)
+        public ActionResult Edit([Bind(Include = "AppUserID,FirstName,MiddleName,LastName,Initials,Prefix,Suffix,LoginName,Password,DisabledDate,LoginAttemptsCount,AgreedToLicenseDate,SpecialOption,IsActive,Email,Phone,CellPhone,Fax,AppUserNote,SortNameFirstLast,SortNameLastFirst,DisplayName,CreatedByID,CreatedDate,ModifiedByID,ModifiedDate")] AppUser appUser)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(decision_Item).State = EntityState.Modified;
+                db.Entry(appUser).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(decision_Item);
+            return View(appUser);
         }
 
-        // GET: DecisionMVC/Delete/5
+        // GET: UserMVC/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Decision_Item decision_Item = db.Decision_Items.Find(id);
-            if (decision_Item == null)
+            AppUser appUser = db.AppUsers.Find(id);
+            if (appUser == null)
             {
                 return HttpNotFound();
             }
-            return View(decision_Item);
+            return View(appUser);
         }
 
-        // POST: DecisionMVC/Delete/5
+        // POST: UserMVC/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Decision_Item decision_Item = db.Decision_Items.Find(id);
-            db.Decision_Items.Remove(decision_Item);
+            AppUser appUser = db.AppUsers.Find(id);
+            db.AppUsers.Remove(appUser);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

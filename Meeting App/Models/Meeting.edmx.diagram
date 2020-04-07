@@ -4,10 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="235c5d700f294961aa719193a73169d2" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.Action_Item" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Decision_Item" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Meeting" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="b1055fde1c57473c8f7ed250386c317f" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Action_Item" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AppUser" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Decision_Item" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Meeting" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Poll" Width="1.5" PointX="5.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PollOption" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Action_Item_Meeting" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Decision_Item_Meeting" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PollOption_PollOption" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -17,15 +17,19 @@ namespace Meeting_App.Controllers
         private Meeting_AppEntities db = new Meeting_AppEntities();
 
         // GET: api/Action
+        [HttpGet]
         public IQueryable<Action_Item> GetAction_Items()
         {
+            db.Configuration.ProxyCreationEnabled = false;
             return db.Action_Items;
         }
 
         // GET: api/Action/5
+        [HttpGet]
         [ResponseType(typeof(Action_Item))]
         public IHttpActionResult GetAction_Item(int id)
         {
+           
             Action_Item action_Item = db.Action_Items.Find(id);
             if (action_Item == null)
             {
@@ -36,9 +40,11 @@ namespace Meeting_App.Controllers
         }
 
         // PUT: api/Action/5
+        [HttpPut]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAction_Item(int id, Action_Item action_Item)
+        public IHttpActionResult PUT(int id, Action_Item action_Item)
         {
+           
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -69,11 +75,12 @@ namespace Meeting_App.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        [HttpPost]
         // POST: api/Action
         [ResponseType(typeof(Action_Item))]
         public IHttpActionResult PostAction_Item(Action_Item action_Item)
         {
+           
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -87,8 +94,10 @@ namespace Meeting_App.Controllers
 
         // DELETE: api/Action/5
         [ResponseType(typeof(Action_Item))]
-        public IHttpActionResult DeleteAction_Item(int id)
+       // [DELETE("MM/Action"), HttpPut],HttpDelete]
+        public IHttpActionResult Delete(int id)
         {
+            
             Action_Item action_Item = db.Action_Items.Find(id);
             if (action_Item == null)
             {

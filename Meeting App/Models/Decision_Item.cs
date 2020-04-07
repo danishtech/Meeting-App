@@ -11,22 +11,20 @@ namespace Meeting_App.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Decision_Item
     {
         public int DecisionItemID { get; set; }
-        [Display(Name = "Decision Title")]
         public string DecisionItem_Title { get; set; }
-        [Display(Name = "Project Name")]
         public string project_Name { get; set; }
         public string Description { get; set; }
-        [Display(Name = "Date")]
-        public string DecisionDate { get; set; }
-        [Display(Name = "Time")]
+        public Nullable<System.DateTime> DecisionDate { get; set; }
         public string DecisionTime { get; set; }
-        [Display(Name = "Assigned To")]
         public string DecisionAssignedTo { get; set; }
         public string Priority { get; set; }
+        public Nullable<int> Status { get; set; }
+        public Nullable<int> MeetingID { get; set; }
+    
+        public virtual Meeting Meeting { get; set; }
     }
 }

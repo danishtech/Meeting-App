@@ -26,7 +26,10 @@ namespace Meeting_App.Models
         }
     
         public virtual DbSet<Action_Item> Action_Items { get; set; }
+        public virtual DbSet<AppUser> AppUsers { get; set; }
         public virtual DbSet<Decision_Item> Decision_Items { get; set; }
         public virtual DbSet<Meeting> Meetings { get; set; }
+        public virtual DbSet<Poll> Polls { get; set; }
+        public virtual DbSet<PollOption> PollOptions { get; set; }
     }
 }

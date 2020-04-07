@@ -11,32 +11,34 @@ namespace Meeting_App.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Meeting
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Meeting()
+        {
+            this.Action_Item = new HashSet<Action_Item>();
+            this.Decision_Item = new HashSet<Decision_Item>();
+        }
+    
         public int MeetingID { get; set; }
-        [Display(Name = "Project Name")]
         public string project_Name { get; set; }
-        [Display(Name = "Subject")]
         public string Meeting_Subject { get; set; }
-        [Display(Name = "Objective")]
         public string Meeting_objective { get; set; }
         public string Agenda { get; set; }
-        [Display(Name = "Agenda SubItem")]
         public string Agenda_SubItem { get; set; }
-        [Display(Name = "Date")]
-        public string MeetingDate { get; set; }
-        [Display(Name = "Time")]
+        public Nullable<System.DateTime> MeetingDate { get; set; }
         public string MeetingTime { get; set; }
-        [Display(Name = "Assigned To")]
         public string MeetingAssignedTo { get; set; }
-        [Display(Name = "Reccurence")]
         public string reoccrence { get; set; }
-        [Display(Name = "Location")]
         public string Meeting_Location { get; set; }
         public string Partipatents { get; set; }
-        [Display(Name = "Link")]
         public string Share_Link { get; set; }
+        public Nullable<int> Status { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Action_Item> Action_Item { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Decision_Item> Decision_Item { get; set; }
     }
 }

@@ -46,7 +46,7 @@ namespace Meeting_App.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MeetingID,project_Name,Meeting_Subject,Meeting_objective,Agenda,Agenda_SubItem,MeetingDate,MeetingTime,MeetingAssignedTo,reoccrence,Meeting_Location,Partipatents,Share_Link")] Meeting meeting)
+        public ActionResult Create([Bind(Include = "MeetingID,project_Name,Meeting_Subject,Meeting_objective,Agenda,Agenda_SubItem,MeetingDate,MeetingTime,MeetingAssignedTo,reoccrence,Meeting_Location,Partipatents,Share_Link,Status")] Meeting meeting)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace Meeting_App.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MeetingID,project_Name,Meeting_Subject,Meeting_objective,Agenda,Agenda_SubItem,MeetingDate,MeetingTime,MeetingAssignedTo,reoccrence,Meeting_Location,Partipatents,Share_Link")] Meeting meeting)
+        public ActionResult Edit([Bind(Include = "MeetingID,project_Name,Meeting_Subject,Meeting_objective,Agenda,Agenda_SubItem,MeetingDate,MeetingTime,MeetingAssignedTo,reoccrence,Meeting_Location,Partipatents,Share_Link,Status")] Meeting meeting)
         {
             if (ModelState.IsValid)
             {

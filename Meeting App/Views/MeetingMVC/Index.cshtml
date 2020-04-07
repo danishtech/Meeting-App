@@ -47,6 +47,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Share_Link)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
         <th></th>
     </tr>
 
@@ -88,7 +91,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.Share_Link)
         </td>
-        <td >
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.MeetingID }) |
             @Html.ActionLink("Details", "Details", new { id=item.MeetingID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.MeetingID })

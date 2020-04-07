@@ -17,7 +17,8 @@ namespace Meeting_App.Controllers
         // GET: ActionMVC
         public ActionResult Index()
         {
-            return View(db.Action_Items.ToList());
+            var action_Items = db.Action_Items.Include(a => a.Meeting);
+            return View(action_Items.ToList());
         }
 
         // GET: ActionMVC/Details/5
@@ -38,6 +39,7 @@ namespace Meeting_App.Controllers
         // GET: ActionMVC/Create
         public ActionResult Create()
         {
+            ViewBag.MeetingID = new SelectList(db.Meetings, "MeetingID", "project_Name");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace Meeting_App.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ActionItemID,ActionItem_Title,project_Name,ActionDate,ActionTime,ActionAssignedTo")] Action_Item action_Item)
+        public ActionResult Create([Bind(Include = "ActionItemID,ActionItem_Title,Action_Description,project_Name,ActionDate,ActionTime,ActionAssignedTo,Status,Priority,MeetingID")] Action_Item action_Item)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace Meeting_App.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.MeetingID = new SelectList(db.Meetings, "MeetingID", "project_Name", action_Item.MeetingID);
             return View(action_Item);
         }
 
@@ -70,6 +73,7 @@ namespace Meeting_App.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.MeetingID = new SelectList(db.Meetings, "MeetingID", "project_Name", action_Item.MeetingID);
             return View(action_Item);
         }
 
@@ -78,7 +82,7 @@ namespace Meeting_App.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ActionItemID,ActionItem_Title,project_Name,ActionDate,ActionTime,ActionAssignedTo")] Action_Item action_Item)
+        public ActionResult Edit([Bind(Include = "ActionItemID,ActionItem_Title,Action_Description,project_Name,ActionDate,ActionTime,ActionAssignedTo,Status,Priority,MeetingID")] Action_Item action_Item)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace Meeting_App.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.MeetingID = new SelectList(db.Meetings, "MeetingID", "project_Name", action_Item.MeetingID);
             return View(action_Item);
         }
 

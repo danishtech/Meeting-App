@@ -1,0 +1,90 @@
+﻿@model Meeting_App.Models.Decision_Item
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Decision_Item</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DecisionItem_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DecisionItem_Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.project_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.project_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DecisionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DecisionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DecisionTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DecisionTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DecisionAssignedTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DecisionAssignedTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Priority)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Priority)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting.project_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Meeting.project_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DecisionItemID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

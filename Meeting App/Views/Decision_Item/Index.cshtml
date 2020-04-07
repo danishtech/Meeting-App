@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Meeting_App.Models.Decision_Item>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DecisionItem_Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.project_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DecisionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DecisionTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DecisionAssignedTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Priority)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Meeting.project_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DecisionItem_Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.project_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DecisionDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DecisionTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DecisionAssignedTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Priority)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Meeting.project_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DecisionItemID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DecisionItemID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DecisionItemID })
+        </td>
+    </tr>
+}
+
+</table>
