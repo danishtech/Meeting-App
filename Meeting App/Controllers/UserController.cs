@@ -64,6 +64,7 @@ namespace Meeting_App.Controllers
         }
 
         // PUT: api/User/5
+        [Route("api/User/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutAppUser(int id, AppUser appUser)
         {
@@ -113,6 +114,7 @@ namespace Meeting_App.Controllers
             return CreatedAtRoute("DefaultApi", new { id = appUser.AppUserID }, appUser);
         }
 
+        [Route("api/User/{id}")]
         // DELETE: api/User/5
         [ResponseType(typeof(AppUser))]
         public IHttpActionResult DeleteAppUser(int id)
