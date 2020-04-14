@@ -17,13 +17,11 @@ namespace Meeting_App.Controllers
         private Meeting_AppEntities db = new Meeting_AppEntities();
 
         // GET: api/Meeting
-        [HttpGet]
         public IQueryable<Meeting> GetMeetings()
         {
-            db.Configuration.ProxyCreationEnabled = false;
             return db.Meetings;
         }
-        [HttpGet]
+
         // GET: api/Meeting/5
         [ResponseType(typeof(Meeting))]
         public IHttpActionResult GetMeeting(int id)
@@ -36,7 +34,7 @@ namespace Meeting_App.Controllers
 
             return Ok(meeting);
         }
-        [HttpPut]
+
         // PUT: api/Meeting/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutMeeting(int id, Meeting meeting)
@@ -73,7 +71,6 @@ namespace Meeting_App.Controllers
         }
 
         // POST: api/Meeting
-        [HttpPost]
         [ResponseType(typeof(Meeting))]
         public IHttpActionResult PostMeeting(Meeting meeting)
         {
@@ -87,7 +84,7 @@ namespace Meeting_App.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = meeting.MeetingID }, meeting);
         }
-        [HttpDelete]
+
         // DELETE: api/Meeting/5
         [ResponseType(typeof(Meeting))]
         public IHttpActionResult DeleteMeeting(int id)

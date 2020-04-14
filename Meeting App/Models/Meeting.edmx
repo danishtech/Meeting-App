@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Action Item">
           <Key>
             <PropertyRef Name="ActionItemID" />
@@ -84,6 +84,7 @@
           <Property Name="Partipatents" Type="varchar" MaxLength="500" />
           <Property Name="Share Link" Type="varchar(max)" />
           <Property Name="Status" Type="int" />
+          <Property Name="HostUser" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Poll">
           <Key>
@@ -160,8 +161,7 @@
             <End Role="PollOption" EntitySet="PollOption" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -248,6 +248,7 @@
           <Property Name="Status" Type="Int32" />
           <NavigationProperty Name="Action_Item" Relationship="Self.FK_Action_Item_Meeting" FromRole="Meeting" ToRole="Action_Item" />
           <NavigationProperty Name="Decision_Item" Relationship="Self.FK_Decision_Item_Meeting" FromRole="Meeting" ToRole="Decision_Item" />
+          <Property Name="HostUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Poll">
           <Key>
@@ -399,6 +400,7 @@
           <EntitySetMapping Name="Meetings">
             <EntityTypeMapping TypeName="Model.Meeting">
               <MappingFragment StoreEntitySet="Meeting">
+                <ScalarProperty Name="HostUser" ColumnName="HostUser" />
                 <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
                 <ScalarProperty Name="project_Name" ColumnName="project Name" />
                 <ScalarProperty Name="Meeting_Subject" ColumnName="Meeting Subject" />
