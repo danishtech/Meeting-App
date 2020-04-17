@@ -9,6 +9,12 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Meeting_App.Models;
+using Newtonsoft.Json.Linq;
+using System.IO;
+using System.Net.Mail;
+using System.Threading.Tasks;
+using System.Web;
+
 
 namespace Meeting_App.Controllers
 {
@@ -21,15 +27,34 @@ namespace Meeting_App.Controllers
         {
             return db.AppUsers;
         }
-        //[HttpGet]
-        //[Route("api/UserExits/{email}")]
-        //public bool IsUserExits(AppUser user)
-        //{
-        //    bool userAlreadyExists = db.AppUsers.Any(x => x.Email == user.Email);
-        //    return userAlreadyExists;
-        //}
-        // GET: api/User/5
-       // [ResponseType(typeof(AppUser))]
+        [HttpPost]
+        [Route("api/User/SendEmail")]
+        public async Task SendEmail([FromBody]JObject objData)
+        {
+            var message = new MailMessage();
+            message.To.Add(new MailAddress(objData["toname"].ToString() + " <" + objData["toemail"].ToString() + ">"));
+            message.From = new MailAddress("danish.tech@gmail.com");
+            message.Bcc.Add(new MailAddress("checkboxnoida@gmail.com"));
+            message.Subject = objData["subject"].ToString();
+            message.Body = createEmailBody(objData["toname"].ToString(), objData["message"].ToString());
+            message.IsBodyHtml = true;
+            using (var smtp = new SmtpClient())
+            {
+                await smtp.SendMailAsync(message);
+                await Task.FromResult(0);
+            }
+        }
+        private string createEmailBody(string userName, string message)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("/htmlTemplate.html")))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{UserName}", userName);
+            body = body.Replace("{message}", message);
+            return body;
+        }
         [HttpGet]
        [Route("api/User/UserExists")]
         public bool UserExists(string id)

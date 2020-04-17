@@ -349,6 +349,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="htmlTemplate.html" />
     <Content Include="Models\Meeting.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Meeting.Context.cs</LastGenOutput>

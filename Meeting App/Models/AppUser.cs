@@ -11,24 +11,30 @@ namespace Meeting_App.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class AppUser
     {
         public int AppUserID { get; set; }
+        [Required]
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string Initials { get; set; }
         public string Prefix { get; set; }
         public string Suffix { get; set; }
+        [Required]
         public string LoginName { get; set; }
+        [Required]
         public string Password { get; set; }
         public Nullable<System.DateTime> DisabledDate { get; set; }
         public Nullable<int> LoginAttemptsCount { get; set; }
         public Nullable<System.DateTime> AgreedToLicenseDate { get; set; }
         public string SpecialOption { get; set; }
         public bool IsActive { get; set; }
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string Phone { get; set; }
         public string CellPhone { get; set; }
         public string Fax { get; set; }
