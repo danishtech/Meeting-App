@@ -31,5 +31,7 @@ namespace Meeting_App.Models
         public virtual DbSet<Meeting> Meetings { get; set; }
         public virtual DbSet<Poll> Polls { get; set; }
         public virtual DbSet<PollOption> PollOptions { get; set; }
+
+       
     }
 }

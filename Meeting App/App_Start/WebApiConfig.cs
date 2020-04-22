@@ -4,6 +4,13 @@ using System.Linq;
 using System.Web.Http;
 using System.Configuration;
 using System.Web.Http.Cors;
+//using Microsoft.AspNetCore.SignalR;
+//using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNet.SignalR;
+using Glimpse.AspNet.Tab;
+using System.Net.Http.Headers;
+//using Owin;
+
 namespace Meeting_App
 {
     public static class WebApiConfig
@@ -22,7 +29,7 @@ namespace Meeting_App
             //   defaults: new { id = RouteParameter.Optional }
             //   );
 
-           config.Routes.MapHttpRoute(
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
@@ -37,12 +44,26 @@ namespace Meeting_App
 
             var corsAttr = new EnableCorsAttribute("*", "*", "GET, POST, PUT, DELETE, OPTIONS");
             config.EnableCors(corsAttr);
-
-
             HttpConfiguration configEntity = GlobalConfiguration.Configuration;
             configEntity.Formatters.JsonFormatter
                         .SerializerSettings
                         .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            Global.LogMessage = Requestlog.PostToClient;
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+            //Routes.MapHub<ChatHub>("chat");
+
         }
     }
-}
+    public class Global
+        {
+            public delegate void DelLogMessage(string data);
+            public static DelLogMessage LogMessage;
+        }
+
+    }
+    
+        
+        
+        //}
+    
+
