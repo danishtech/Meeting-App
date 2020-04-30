@@ -12,40 +12,29 @@ namespace Meeting_App.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Meeting
+    public partial class Comment
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Meeting()
+        public Comment()
         {
             this.Action_Item = new HashSet<Action_Item>();
             this.Decision_Item = new HashSet<Decision_Item>();
-            this.Meeting_Notes = new HashSet<Meeting_Note>();
+            this.Meetings = new HashSet<Meeting>();
         }
     
-        public int MeetingID { get; set; }
+        public int CommentID { get; set; }
         public string project_Name { get; set; }
-        public string Meeting_Subject { get; set; }
-        public string Meeting_objective { get; set; }
-        public string Agenda { get; set; }
-        public string Agenda_SubItem { get; set; }
-        public Nullable<System.DateTime> MeetingDate { get; set; }
-        public string MeetingTime { get; set; }
-        public string MeetingAssignedTo { get; set; }
-        public string reoccrence { get; set; }
-        public string Meeting_Location { get; set; }
-        public string Partipatents { get; set; }
-        public string Share_Link { get; set; }
+        public string Comment1 { get; set; }
+        public Nullable<System.DateTime> CommentDate { get; set; }
+        public string CommentTime { get; set; }
         public Nullable<int> Status { get; set; }
         public string HostUser { get; set; }
-        public string Conclusion { get; set; }
-        public Nullable<int> CommentID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Action_Item> Action_Item { get; set; }
-        public virtual Comment Comment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Decision_Item> Decision_Item { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Meeting_Note> Meeting_Notes { get; set; }
+        public virtual ICollection<Meeting> Meetings { get; set; }
     }
 }

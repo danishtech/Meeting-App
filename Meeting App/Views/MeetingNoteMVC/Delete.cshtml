@@ -1,4 +1,4 @@
-﻿@model Meeting_App.Models.Action_Item
+﻿@model Meeting_App.Models.Meeting_Note
 
 @{
     ViewBag.Title = "Delete";
@@ -8,23 +8,23 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Action_Item</h4>
+    <h4>Meeting_Note</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ActionItem_Title)
+            @Html.DisplayNameFor(model => model.MeetingNotes)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ActionItem_Title)
+            @Html.DisplayFor(model => model.MeetingNotes)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Action_Description)
+            @Html.DisplayNameFor(model => model.MeetingNotes_Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Action_Description)
+            @Html.DisplayFor(model => model.MeetingNotes_Description)
         </dd>
 
         <dt>
@@ -36,27 +36,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ActionDate)
+            @Html.DisplayNameFor(model => model.CreatedDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ActionDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ActionTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ActionTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ActionAssignedTo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ActionAssignedTo)
+            @Html.DisplayFor(model => model.CreatedDate)
         </dd>
 
         <dt>
@@ -68,11 +52,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Priority)
+            @Html.DisplayNameFor(model => model.LoginName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Priority)
+            @Html.DisplayFor(model => model.LoginName)
         </dd>
 
         <dt>
@@ -81,14 +65,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Meeting.project_Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Comment.project_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Comment.project_Name)
         </dd>
 
     </dl>

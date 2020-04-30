@@ -53,6 +53,12 @@
         <th>
             @Html.DisplayNameFor(model => model.HostUser)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Conclusion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment.project_Name)
+        </th>
         <th></th>
     </tr>
 
@@ -99,6 +105,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.HostUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Conclusion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment.project_Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.MeetingID }) |

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Meeting_App.Models.Meeting_Note>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MeetingNotes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MeetingNotes_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.project_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoginName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Meeting.project_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MeetingNotes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MeetingNotes_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.project_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoginName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Meeting.project_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MeetingNotesID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MeetingNotesID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MeetingNotesID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -75,6 +75,22 @@
             @Html.DisplayFor(model => model.Status)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting.project_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Meeting.project_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment.project_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment.project_Name)
+        </dd>
+
     </dl>
 
     @using (Html.BeginForm()) {

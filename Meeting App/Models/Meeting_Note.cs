@@ -12,21 +12,17 @@ namespace Meeting_App.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Decision_Item
+    public partial class Meeting_Note
     {
-        public int DecisionItemID { get; set; }
-        public string DecisionItem_Title { get; set; }
+        public int MeetingNotesID { get; set; }
+        public string MeetingNotes { get; set; }
+        public string MeetingNotes_Description { get; set; }
         public string project_Name { get; set; }
-        public string Description { get; set; }
-        public Nullable<System.DateTime> DecisionDate { get; set; }
-        public string DecisionTime { get; set; }
-        public string DecisionAssignedTo { get; set; }
-        public string Priority { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> Status { get; set; }
+        public string LoginName { get; set; }
         public Nullable<int> MeetingID { get; set; }
-        public Nullable<int> CommentID { get; set; }
     
-        public virtual Comment Comment { get; set; }
         public virtual Meeting Meeting { get; set; }
     }
 }

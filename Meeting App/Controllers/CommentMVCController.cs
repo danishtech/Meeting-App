@@ -10,112 +10,107 @@ using Meeting_App.Models;
 
 namespace Meeting_App.Controllers
 {
-    public class MeetingMVCController : Controller
+    public class CommentMVCController : Controller
     {
         private Meeting_AppEntities db = new Meeting_AppEntities();
 
-        // GET: MeetingMVC
+        // GET: CommentMVC
         public ActionResult Index()
         {
-            var meetings = db.Meetings.Include(m => m.Comment);
-            return View(meetings.ToList());
+            return View(db.Comments.ToList());
         }
 
-        // GET: MeetingMVC/Details/5
+        // GET: CommentMVC/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Meeting meeting = db.Meetings.Find(id);
-            if (meeting == null)
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            return View(meeting);
+            return View(comment);
         }
 
-        // GET: MeetingMVC/Create
+        // GET: CommentMVC/Create
         public ActionResult Create()
         {
-            ViewBag.CommentID = new SelectList(db.Comments, "CommentID", "project_Name");
             return View();
         }
 
-        // POST: MeetingMVC/Create
+        // POST: CommentMVC/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MeetingID,project_Name,Meeting_Subject,Meeting_objective,Agenda,Agenda_SubItem,MeetingDate,MeetingTime,MeetingAssignedTo,reoccrence,Meeting_Location,Partipatents,Share_Link,Status,HostUser,Conclusion,CommentID")] Meeting meeting)
+        public ActionResult Create([Bind(Include = "CommentID,project_Name,Comment1,CommentDate,CommentTime,Status,HostUser")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                db.Meetings.Add(meeting);
+                db.Comments.Add(comment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CommentID = new SelectList(db.Comments, "CommentID", "project_Name", meeting.CommentID);
-            return View(meeting);
+            return View(comment);
         }
 
-        // GET: MeetingMVC/Edit/5
+        // GET: CommentMVC/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Meeting meeting = db.Meetings.Find(id);
-            if (meeting == null)
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CommentID = new SelectList(db.Comments, "CommentID", "project_Name", meeting.CommentID);
-            return View(meeting);
+            return View(comment);
         }
 
-        // POST: MeetingMVC/Edit/5
+        // POST: CommentMVC/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MeetingID,project_Name,Meeting_Subject,Meeting_objective,Agenda,Agenda_SubItem,MeetingDate,MeetingTime,MeetingAssignedTo,reoccrence,Meeting_Location,Partipatents,Share_Link,Status,HostUser,Conclusion,CommentID")] Meeting meeting)
+        public ActionResult Edit([Bind(Include = "CommentID,project_Name,Comment1,CommentDate,CommentTime,Status,HostUser")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(meeting).State = EntityState.Modified;
+                db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CommentID = new SelectList(db.Comments, "CommentID", "project_Name", meeting.CommentID);
-            return View(meeting);
+            return View(comment);
         }
 
-        // GET: MeetingMVC/Delete/5
+        // GET: CommentMVC/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Meeting meeting = db.Meetings.Find(id);
-            if (meeting == null)
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            return View(meeting);
+            return View(comment);
         }
 
-        // POST: MeetingMVC/Delete/5
+        // POST: CommentMVC/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Meeting meeting = db.Meetings.Find(id);
-            db.Meetings.Remove(meeting);
+            Comment comment = db.Comments.Find(id);
+            db.Comments.Remove(comment);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

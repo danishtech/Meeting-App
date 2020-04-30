@@ -10,18 +10,18 @@ using Meeting_App.Models;
 
 namespace Meeting_App.Controllers
 {
-    public class Decision_ItemController : Controller
+    public class DecisionMVCController : Controller
     {
         private Meeting_AppEntities db = new Meeting_AppEntities();
 
-        // GET: Decision_Item
+        // GET: DecisionMVC
         public ActionResult Index()
         {
-            var decision_Items = db.Decision_Items.Include(d => d.Meeting);
+            var decision_Items = db.Decision_Items.Include(d => d.Meeting).Include(d => d.Comment);
             return View(decision_Items.ToList());
         }
 
-        // GET: Decision_Item/Details/5
+        // GET: DecisionMVC/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,19 +36,20 @@ namespace Meeting_App.Controllers
             return View(decision_Item);
         }
 
-        // GET: Decision_Item/Create
+        // GET: DecisionMVC/Create
         public ActionResult Create()
         {
             ViewBag.MeetingID = new SelectList(db.Meetings, "MeetingID", "project_Name");
+            ViewBag.CommentID = new SelectList(db.Comments, "CommentID", "project_Name");
             return View();
         }
 
-        // POST: Decision_Item/Create
+        // POST: DecisionMVC/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DecisionItemID,DecisionItem_Title,project_Name,Description,DecisionDate,DecisionTime,DecisionAssignedTo,Priority,Status,MeetingID")] Decision_Item decision_Item)
+        public ActionResult Create([Bind(Include = "DecisionItemID,DecisionItem_Title,project_Name,Description,DecisionDate,DecisionTime,DecisionAssignedTo,Priority,Status,MeetingID,CommentID")] Decision_Item decision_Item)
         {
             if (ModelState.IsValid)
             {
@@ -58,10 +59,11 @@ namespace Meeting_App.Controllers
             }
 
             ViewBag.MeetingID = new SelectList(db.Meetings, "MeetingID", "project_Name", decision_Item.MeetingID);
+            ViewBag.CommentID = new SelectList(db.Comments, "CommentID", "project_Name", decision_Item.CommentID);
             return View(decision_Item);
         }
 
-        // GET: Decision_Item/Edit/5
+        // GET: DecisionMVC/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -74,15 +76,16 @@ namespace Meeting_App.Controllers
                 return HttpNotFound();
             }
             ViewBag.MeetingID = new SelectList(db.Meetings, "MeetingID", "project_Name", decision_Item.MeetingID);
+            ViewBag.CommentID = new SelectList(db.Comments, "CommentID", "project_Name", decision_Item.CommentID);
             return View(decision_Item);
         }
 
-        // POST: Decision_Item/Edit/5
+        // POST: DecisionMVC/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DecisionItemID,DecisionItem_Title,project_Name,Description,DecisionDate,DecisionTime,DecisionAssignedTo,Priority,Status,MeetingID")] Decision_Item decision_Item)
+        public ActionResult Edit([Bind(Include = "DecisionItemID,DecisionItem_Title,project_Name,Description,DecisionDate,DecisionTime,DecisionAssignedTo,Priority,Status,MeetingID,CommentID")] Decision_Item decision_Item)
         {
             if (ModelState.IsValid)
             {
@@ -91,10 +94,11 @@ namespace Meeting_App.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.MeetingID = new SelectList(db.Meetings, "MeetingID", "project_Name", decision_Item.MeetingID);
+            ViewBag.CommentID = new SelectList(db.Comments, "CommentID", "project_Name", decision_Item.CommentID);
             return View(decision_Item);
         }
 
-        // GET: Decision_Item/Delete/5
+        // GET: DecisionMVC/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -109,7 +113,7 @@ namespace Meeting_App.Controllers
             return View(decision_Item);
         }
 
-        // POST: Decision_Item/Delete/5
+        // POST: DecisionMVC/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

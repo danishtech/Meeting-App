@@ -25,6 +25,7 @@ namespace Meeting_App.Controllers
         // GET: api/User
         public IQueryable<AppUser> GetAppUsers()
         {
+
             return db.AppUsers;
         }
         [HttpPost]
@@ -33,8 +34,8 @@ namespace Meeting_App.Controllers
         {
             var message = new MailMessage();
 
-            string[] Multi = objData["toemail"].ToString().Split(';'); //spiliting input Email id string with comma(,)
-            string[] Multiarray = objData["toname"].ToString().Split(';');
+            string[] Multi = objData["toemail"].ToString().Split(','); //spiliting input Email id string with comma(,)
+            string[] Multiarray = objData["toname"].ToString().Split(',');
             message.From = new MailAddress("checkboxnoida@gmail.com");
             message.Bcc.Add(new MailAddress("checkboxnoida@gmail.com"));
             message.Subject = objData["subject"].ToString();
@@ -109,7 +110,15 @@ namespace Meeting_App.Controllers
 
             return userAlreadyExists;
         }
+        [HttpGet]
+        [Route("api/User/UserEmailExists")]
+        public bool UserEmailExists(string id)
+        {
+            // string email = Convert.ToString(id);
+            bool userAlreadyExists = db.AppUsers.Any(x => x.Email.ToLower().Trim() == id.ToLower().Trim());
 
+            return userAlreadyExists;
+        }
         [HttpGet]
         [Route("api/User/UserAuthnticate")]
         public bool UserExists(string Loginname, string password)

@@ -391,11 +391,17 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ActionController.cs" />
     <Compile Include="Controllers\ActionMVCController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\CommentMVCController.cs" />
     <Compile Include="Controllers\DecisionController.cs" />
-    <Compile Include="Controllers\Decision_ItemController.cs" />
+    <Compile Include="Controllers\DecisionMVCController.cs" />
+    <Compile Include="Controllers\FileShareController.cs" />
+    <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MeetingController.cs" />
     <Compile Include="Controllers\MeetingMVCController.cs" />
+    <Compile Include="Controllers\MeetingNoteController.cs" />
+    <Compile Include="Controllers\MeetingNoteMVCController.cs" />
     <Compile Include="Controllers\PollController.cs" />
     <Compile Include="Controllers\PollMVCController.cs" />
     <Compile Include="Controllers\PollOptionController.cs" />
@@ -414,9 +420,13 @@
     <Compile Include="Models\AppUser.cs">
       <DependentUpon>Meeting.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Comment.cs">
+      <DependentUpon>Meeting.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Decision_Item.cs">
       <DependentUpon>Meeting.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FileToUpload.cs" />
     <Compile Include="Models\Meeting.Context.cs">
       <DependentUpon>Meeting.Context.tt</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -435,6 +445,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Meeting.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Meeting_Note.cs">
+      <DependentUpon>Meeting.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Poll.cs">
       <DependentUpon>Meeting.tt</DependentUpon>
@@ -446,6 +459,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="check.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -597,6 +611,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="SignalR.html" />
+    <Content Include="UploadFile\check.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -659,9 +674,22 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\MeetingNoteMVC\Create.cshtml" />
+    <Content Include="Views\MeetingNoteMVC\Delete.cshtml" />
+    <Content Include="Views\MeetingNoteMVC\Details.cshtml" />
+    <Content Include="Views\MeetingNoteMVC\Edit.cshtml" />
+    <Content Include="Views\MeetingNoteMVC\Index.cshtml" />
+    <Content Include="UploadFile\MM_Task_List_24-04.xlsx" />
+    <Content Include="UploadFile\MM_Task_List_24-04_danish.xlsx" />
+    <Content Include="Views\CommentMVC\Create.cshtml" />
+    <Content Include="Views\CommentMVC\Delete.cshtml" />
+    <Content Include="Views\CommentMVC\Details.cshtml" />
+    <Content Include="Views\CommentMVC\Edit.cshtml" />
+    <Content Include="Views\CommentMVC\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\FileUpload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

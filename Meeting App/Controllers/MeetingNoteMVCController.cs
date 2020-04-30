@@ -10,112 +10,112 @@ using Meeting_App.Models;
 
 namespace Meeting_App.Controllers
 {
-    public class MeetingMVCController : Controller
+    public class MeetingNoteMVCController : Controller
     {
         private Meeting_AppEntities db = new Meeting_AppEntities();
 
-        // GET: MeetingMVC
+        // GET: MeetingNoteMVC
         public ActionResult Index()
         {
-            var meetings = db.Meetings.Include(m => m.Comment);
-            return View(meetings.ToList());
+            var meeting_Notes = db.Meeting_Notes.Include(m => m.Meeting);
+            return View(meeting_Notes.ToList());
         }
 
-        // GET: MeetingMVC/Details/5
+        // GET: MeetingNoteMVC/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Meeting meeting = db.Meetings.Find(id);
-            if (meeting == null)
+            Meeting_Note meeting_Note = db.Meeting_Notes.Find(id);
+            if (meeting_Note == null)
             {
                 return HttpNotFound();
             }
-            return View(meeting);
+            return View(meeting_Note);
         }
 
-        // GET: MeetingMVC/Create
+        // GET: MeetingNoteMVC/Create
         public ActionResult Create()
         {
-            ViewBag.CommentID = new SelectList(db.Comments, "CommentID", "project_Name");
+            ViewBag.MeetingID = new SelectList(db.Meetings, "MeetingID", "project_Name");
             return View();
         }
 
-        // POST: MeetingMVC/Create
+        // POST: MeetingNoteMVC/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MeetingID,project_Name,Meeting_Subject,Meeting_objective,Agenda,Agenda_SubItem,MeetingDate,MeetingTime,MeetingAssignedTo,reoccrence,Meeting_Location,Partipatents,Share_Link,Status,HostUser,Conclusion,CommentID")] Meeting meeting)
+        public ActionResult Create([Bind(Include = "MeetingNotesID,MeetingNotes,MeetingNotes_Description,project_Name,CreatedDate,Status,LoginName,MeetingID")] Meeting_Note meeting_Note)
         {
             if (ModelState.IsValid)
             {
-                db.Meetings.Add(meeting);
+                db.Meeting_Notes.Add(meeting_Note);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CommentID = new SelectList(db.Comments, "CommentID", "project_Name", meeting.CommentID);
-            return View(meeting);
+            ViewBag.MeetingID = new SelectList(db.Meetings, "MeetingID", "project_Name", meeting_Note.MeetingID);
+            return View(meeting_Note);
         }
 
-        // GET: MeetingMVC/Edit/5
+        // GET: MeetingNoteMVC/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Meeting meeting = db.Meetings.Find(id);
-            if (meeting == null)
+            Meeting_Note meeting_Note = db.Meeting_Notes.Find(id);
+            if (meeting_Note == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CommentID = new SelectList(db.Comments, "CommentID", "project_Name", meeting.CommentID);
-            return View(meeting);
+            ViewBag.MeetingID = new SelectList(db.Meetings, "MeetingID", "project_Name", meeting_Note.MeetingID);
+            return View(meeting_Note);
         }
 
-        // POST: MeetingMVC/Edit/5
+        // POST: MeetingNoteMVC/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MeetingID,project_Name,Meeting_Subject,Meeting_objective,Agenda,Agenda_SubItem,MeetingDate,MeetingTime,MeetingAssignedTo,reoccrence,Meeting_Location,Partipatents,Share_Link,Status,HostUser,Conclusion,CommentID")] Meeting meeting)
+        public ActionResult Edit([Bind(Include = "MeetingNotesID,MeetingNotes,MeetingNotes_Description,project_Name,CreatedDate,Status,LoginName,MeetingID")] Meeting_Note meeting_Note)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(meeting).State = EntityState.Modified;
+                db.Entry(meeting_Note).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CommentID = new SelectList(db.Comments, "CommentID", "project_Name", meeting.CommentID);
-            return View(meeting);
+            ViewBag.MeetingID = new SelectList(db.Meetings, "MeetingID", "project_Name", meeting_Note.MeetingID);
+            return View(meeting_Note);
         }
 
-        // GET: MeetingMVC/Delete/5
+        // GET: MeetingNoteMVC/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Meeting meeting = db.Meetings.Find(id);
-            if (meeting == null)
+            Meeting_Note meeting_Note = db.Meeting_Notes.Find(id);
+            if (meeting_Note == null)
             {
                 return HttpNotFound();
             }
-            return View(meeting);
+            return View(meeting_Note);
         }
 
-        // POST: MeetingMVC/Delete/5
+        // POST: MeetingNoteMVC/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Meeting meeting = db.Meetings.Find(id);
-            db.Meetings.Remove(meeting);
+            Meeting_Note meeting_Note = db.Meeting_Notes.Find(id);
+            db.Meeting_Notes.Remove(meeting_Note);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

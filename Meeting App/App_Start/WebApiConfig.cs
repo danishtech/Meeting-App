@@ -42,7 +42,7 @@ namespace Meeting_App
             //local
             config.EnableCors();
 
-            var corsAttr = new EnableCorsAttribute("*", "*", "GET, POST, PUT, DELETE, OPTIONS");
+            var corsAttr = new EnableCorsAttribute("*", "*", "GET, POST, PUT, DELETE, OPTIONS, PATCH, TRACE, CONNECT, HEAD");
             config.EnableCors(corsAttr);
             HttpConfiguration configEntity = GlobalConfiguration.Configuration;
             configEntity.Formatters.JsonFormatter

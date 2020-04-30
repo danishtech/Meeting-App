@@ -1,0 +1,66 @@
+﻿@model Meeting_App.Models.Comment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Comment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.project_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.project_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HostUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HostUser)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CommentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

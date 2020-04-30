@@ -24,7 +24,9 @@ namespace Meeting_App.Models
         public Nullable<int> Status { get; set; }
         public string Priority { get; set; }
         public Nullable<int> MeetingID { get; set; }
+        public Nullable<int> CommentID { get; set; }
     
+        public virtual Comment Comment { get; set; }
         public virtual Meeting Meeting { get; set; }
     }
 }
