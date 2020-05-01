@@ -17,7 +17,7 @@ namespace Meeting_App.Controllers
         // GET: DecisionMVC
         public ActionResult Index()
         {
-            var decision_Items = db.Decision_Items.Include(d => d.Meeting).Include(d => d.Comment);
+            var decision_Items = db.Decision_Items.Include(d => d.Meeting);
             return View(decision_Items.ToList());
         }
 
@@ -40,7 +40,6 @@ namespace Meeting_App.Controllers
         public ActionResult Create()
         {
             ViewBag.MeetingID = new SelectList(db.Meetings, "MeetingID", "project_Name");
-            ViewBag.CommentID = new SelectList(db.Comments, "CommentID", "project_Name");
             return View();
         }
 
@@ -49,7 +48,7 @@ namespace Meeting_App.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DecisionItemID,DecisionItem_Title,project_Name,Description,DecisionDate,DecisionTime,DecisionAssignedTo,Priority,Status,MeetingID,CommentID")] Decision_Item decision_Item)
+        public ActionResult Create([Bind(Include = "DecisionItemID,DecisionItem_Title,project_Name,Description,DecisionDate,DecisionTime,DecisionAssignedTo,Priority,Status,MeetingID")] Decision_Item decision_Item)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +58,6 @@ namespace Meeting_App.Controllers
             }
 
             ViewBag.MeetingID = new SelectList(db.Meetings, "MeetingID", "project_Name", decision_Item.MeetingID);
-            ViewBag.CommentID = new SelectList(db.Comments, "CommentID", "project_Name", decision_Item.CommentID);
             return View(decision_Item);
         }
 
@@ -76,7 +74,6 @@ namespace Meeting_App.Controllers
                 return HttpNotFound();
             }
             ViewBag.MeetingID = new SelectList(db.Meetings, "MeetingID", "project_Name", decision_Item.MeetingID);
-            ViewBag.CommentID = new SelectList(db.Comments, "CommentID", "project_Name", decision_Item.CommentID);
             return View(decision_Item);
         }
 
@@ -85,7 +82,7 @@ namespace Meeting_App.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DecisionItemID,DecisionItem_Title,project_Name,Description,DecisionDate,DecisionTime,DecisionAssignedTo,Priority,Status,MeetingID,CommentID")] Decision_Item decision_Item)
+        public ActionResult Edit([Bind(Include = "DecisionItemID,DecisionItem_Title,project_Name,Description,DecisionDate,DecisionTime,DecisionAssignedTo,Priority,Status,MeetingID")] Decision_Item decision_Item)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +91,6 @@ namespace Meeting_App.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.MeetingID = new SelectList(db.Meetings, "MeetingID", "project_Name", decision_Item.MeetingID);
-            ViewBag.CommentID = new SelectList(db.Comments, "CommentID", "project_Name", decision_Item.CommentID);
             return View(decision_Item);
         }
 

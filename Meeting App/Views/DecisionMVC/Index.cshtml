@@ -38,9 +38,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Meeting.project_Name)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Comment.project_Name)
-        </th>
         <th></th>
     </tr>
 
@@ -72,9 +69,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Meeting.project_Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Comment.project_Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.DecisionItemID }) |

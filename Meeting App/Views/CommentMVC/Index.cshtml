@@ -29,6 +29,15 @@
         <th>
             @Html.DisplayNameFor(model => model.HostUser)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Action_Item.ActionItem_Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Decision_Item.DecisionItem_Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Meeting.project_Name)
+        </th>
         <th></th>
     </tr>
 
@@ -51,6 +60,15 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.HostUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Action_Item.ActionItem_Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Decision_Item.DecisionItem_Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Meeting.project_Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CommentID }) |

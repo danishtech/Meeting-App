@@ -25,13 +25,13 @@ namespace Meeting_App.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Action_Item> Action_Items { get; set; }
         public virtual DbSet<AppUser> AppUsers { get; set; }
-        public virtual DbSet<Decision_Item> Decision_Items { get; set; }
         public virtual DbSet<Poll> Polls { get; set; }
         public virtual DbSet<PollOption> PollOptions { get; set; }
         public virtual DbSet<Meeting_Note> Meeting_Notes { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Action_Item> Action_Items { get; set; }
+        public virtual DbSet<Decision_Item> Decision_Items { get; set; }
         public virtual DbSet<Meeting> Meetings { get; set; }
     }
 }

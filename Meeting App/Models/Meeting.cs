@@ -18,6 +18,7 @@ namespace Meeting_App.Models
         public Meeting()
         {
             this.Action_Item = new HashSet<Action_Item>();
+            this.Comments = new HashSet<Comment>();
             this.Decision_Item = new HashSet<Decision_Item>();
             this.Meeting_Notes = new HashSet<Meeting_Note>();
         }
@@ -38,11 +39,11 @@ namespace Meeting_App.Models
         public Nullable<int> Status { get; set; }
         public string HostUser { get; set; }
         public string Conclusion { get; set; }
-        public Nullable<int> CommentID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Action_Item> Action_Item { get; set; }
-        public virtual Comment Comment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Decision_Item> Decision_Item { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

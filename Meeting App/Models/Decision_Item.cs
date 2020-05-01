@@ -14,6 +14,12 @@ namespace Meeting_App.Models
     
     public partial class Decision_Item
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Decision_Item()
+        {
+            this.Comments = new HashSet<Comment>();
+        }
+    
         public int DecisionItemID { get; set; }
         public string DecisionItem_Title { get; set; }
         public string project_Name { get; set; }
@@ -24,9 +30,9 @@ namespace Meeting_App.Models
         public string Priority { get; set; }
         public Nullable<int> Status { get; set; }
         public Nullable<int> MeetingID { get; set; }
-        public Nullable<int> CommentID { get; set; }
     
-        public virtual Comment Comment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
         public virtual Meeting Meeting { get; set; }
     }
 }

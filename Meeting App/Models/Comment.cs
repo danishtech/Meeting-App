@@ -14,14 +14,6 @@ namespace Meeting_App.Models
     
     public partial class Comment
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Comment()
-        {
-            this.Action_Item = new HashSet<Action_Item>();
-            this.Decision_Item = new HashSet<Decision_Item>();
-            this.Meetings = new HashSet<Meeting>();
-        }
-    
         public int CommentID { get; set; }
         public string project_Name { get; set; }
         public string Comment1 { get; set; }
@@ -29,12 +21,12 @@ namespace Meeting_App.Models
         public string CommentTime { get; set; }
         public Nullable<int> Status { get; set; }
         public string HostUser { get; set; }
+        public Nullable<int> MeetingID { get; set; }
+        public Nullable<int> ActionID { get; set; }
+        public Nullable<int> DecisionID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Action_Item> Action_Item { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Decision_Item> Decision_Item { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Meeting> Meetings { get; set; }
+        public virtual Action_Item Action_Item { get; set; }
+        public virtual Decision_Item Decision_Item { get; set; }
+        public virtual Meeting Meeting { get; set; }
     }
 }
