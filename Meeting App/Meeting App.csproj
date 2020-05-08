@@ -611,6 +611,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="SignalR.html" />
+    <Content Include="UploadFile\7\check.png" />
     <Content Include="UploadFile\check.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -686,9 +687,12 @@
     <Content Include="Views\CommentMVC\Details.cshtml" />
     <Content Include="Views\CommentMVC\Edit.cshtml" />
     <Content Include="Views\CommentMVC\Index.cshtml" />
+    <Content Include="UploadFile\7\MM_Task_List_24-04.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadFile\300\" />
+    <Folder Include="UploadFile\30\" />
     <Folder Include="Views\FileUpload\" />
   </ItemGroup>
   <ItemGroup>

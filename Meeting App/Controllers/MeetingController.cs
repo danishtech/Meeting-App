@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Meeting_App.Models;
@@ -15,6 +16,21 @@ namespace Meeting_App.Controllers
     public class MeetingController : ApiController
     {
         private Meeting_AppEntities db = new Meeting_AppEntities();
+
+        [HttpGet]
+        [Route("api/Meeting/Search")]
+        public IQueryable<Meeting> Search(string searchString)
+        {
+            var meetings = from m in db.Meetings
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                meetings = meetings.Where(s => s.Meeting_Subject.Contains(searchString));
+            }
+
+            return  meetings;
+        }
 
         // GET: api/Meeting
         public IQueryable<Meeting> GetMeetings()

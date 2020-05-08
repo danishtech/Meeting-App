@@ -14,16 +14,18 @@ namespace Meeting_App
     {
         [HttpPost]
         [Route("api/FileUpload")]
-        public HttpResponseMessage UploadJsonFile()
+        public HttpResponseMessage UploadJsonFile(string MeetingID)
         {
             HttpResponseMessage response = new HttpResponseMessage();
             var httpRequest = HttpContext.Current.Request;
+            var dirPath = HttpContext.Current.Server.MapPath("~/UploadFile/"+ MeetingID);
+           DirectoryInfo directoryInfo= Directory.CreateDirectory(dirPath);
             if (httpRequest.Files.Count > 0)
             {
                 foreach (string file in httpRequest.Files)
                 {
                     var postedFile = httpRequest.Files[file];
-                    var filePath = HttpContext.Current.Server.MapPath("~/UploadFile/" + postedFile.FileName);
+                    var filePath = HttpContext.Current.Server.MapPath("~/UploadFile/" + directoryInfo +"\\" + postedFile.FileName);
                     postedFile.SaveAs(filePath);
                 }
             }
@@ -33,13 +35,13 @@ namespace Meeting_App
         // Pass in the filepath of where file is stored and a new file name
         [HttpGet]
         [Route("api/GetFile")]
-        public HttpResponseMessage GetFile(string fileName)
+        public HttpResponseMessage GetFile(string fileName,string MeetingID)
         {
             //Create HTTP Response.
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK);
 
             //Set the File Path.
-            string filePath = HttpContext.Current.Server.MapPath("~/UploadFile/") + fileName;
+            string filePath = HttpContext.Current.Server.MapPath("~/UploadFile/")+ MeetingID +"\\"+ fileName;
 
             //Check whether File exists.
             if (!File.Exists(filePath))
@@ -67,27 +69,27 @@ namespace Meeting_App
             response.Content.Headers.ContentType = new MediaTypeHeaderValue(MimeMapping.GetMimeMapping(fileName));
             return response;
         }
-        [HttpGet]
-        [Route("api/Download")]
-        public HttpResponse GetFileFromServer(string FileName)
-        {
-            string currentFilePath = HttpContext.Current.Server.MapPath("~/UploadFile/" + FileName);
-            string newFileName = FileName + DateTime.Now.Date.ToString();
-            HttpResponse httpresponse = HttpContext.Current.Response;
-            httpresponse.Clear();
-            httpresponse.Charset = "utf-8";
-            httpresponse.ContentType = "application/json"; // mime type to suit file type
-            httpresponse.AddHeader("content-disposition", string.Format("attachment; filename={0}", newFileName));
-            httpresponse.BinaryWrite(File.ReadAllBytes(currentFilePath));
-            httpresponse.End();
-            return httpresponse;
-        }
+        //[HttpGet]
+        //[Route("api/Download")]
+        //public HttpResponse GetFileFromServer(string FileName)
+        //{
+        //    string currentFilePath = HttpContext.Current.Server.MapPath("~/UploadFile/" + FileName);
+        //    string newFileName = FileName + DateTime.Now.Date.ToString();
+        //    HttpResponse httpresponse = HttpContext.Current.Response;
+        //    httpresponse.Clear();
+        //    httpresponse.Charset = "utf-8";
+        //    httpresponse.ContentType = "application/json"; // mime type to suit file type
+        //    httpresponse.AddHeader("content-disposition", string.Format("attachment; filename={0}", newFileName));
+        //    httpresponse.BinaryWrite(File.ReadAllBytes(currentFilePath));
+        //    httpresponse.End();
+        //    return httpresponse;
+        //}
         [HttpGet]
         [Route("api/GetFileList")]
-        public string [] GetAllFiles()
+        public string [] GetAllFiles(string MeetingID)
         {
            
-           string [] folderpath = Directory.GetFiles(HttpContext.Current.Server.MapPath("~/UploadFile/"));
+           string [] folderpath = Directory.GetFiles(HttpContext.Current.Server.MapPath("~/UploadFile/"+ MeetingID));
             
             // finalResult.Add(ResultAarry);
             return folderpath;
@@ -95,13 +97,13 @@ namespace Meeting_App
 
         [HttpGet]
         [Route("api/GetFileAll")]
-        public List<string> GetAll()
+        public List<string> GetAll(string MeetingID)
         {
             string[] folderpath;
             // bool IsfileExists = false;
             string ResultAarry = string.Empty;
             List<string> finalResult = new  List<string>();
-            folderpath = Directory.GetFiles(HttpContext.Current.Server.MapPath("~/UploadFile/"));
+            folderpath = Directory.GetFiles(HttpContext.Current.Server.MapPath("~/UploadFile/"+ MeetingID +"\\"));
             foreach (string path in folderpath)
             {
                 
@@ -135,10 +137,10 @@ namespace Meeting_App
         }
         [HttpGet]
         [Route("api/Search")]
-        public bool Search(string FileName)
+        public bool Search(string FileName,string MeetingID)
         {
             bool IsfileExists = false;
-            string[] folderpath = Directory.GetFiles(HttpContext.Current.Server.MapPath("~/UploadFile/"));
+            string[] folderpath = Directory.GetFiles(HttpContext.Current.Server.MapPath("~/UploadFile/")+ MeetingID+"/");
 
             string fileExists = HttpContext.Current.Server.MapPath("~/UploadFile/") + FileName;
             try
