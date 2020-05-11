@@ -15,7 +15,20 @@ namespace Meeting_App.Controllers
     public class DecisionController : ApiController
     {
         private Meeting_AppEntities db = new Meeting_AppEntities();
+        [HttpGet]
+        [Route("api/Decision/Search")]
+        public IQueryable<Decision_Item> Search(string searchString)
+        {
+            var meetings = from m in db.Decision_Items
+                           select m;
 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                meetings = meetings.Where(s => s.DecisionItem_Title.Contains(searchString));
+            }
+
+            return meetings;
+        }
         // GET: api/Decision
         public IQueryable<Decision_Item> GetDecision_Items()
         {

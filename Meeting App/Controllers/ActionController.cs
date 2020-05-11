@@ -15,6 +15,20 @@ namespace Meeting_App.Controllers
     public class ActionController : ApiController
     {
         private Meeting_AppEntities db = new Meeting_AppEntities();
+        [HttpGet]
+        [Route("api/Action/Search")]
+        public IQueryable<Action_Item> Search(string searchString)
+        {
+            var meetings = from m in db.Action_Items
+                           select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                meetings = meetings.Where(s => s.ActionItem_Title.Contains(searchString));
+            }
+
+            return meetings;
+        }
 
         // GET: api/Action
         public IQueryable<Action_Item> GetAction_Items()
