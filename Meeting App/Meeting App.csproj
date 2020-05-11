@@ -680,8 +680,8 @@
     <Content Include="Views\MeetingNoteMVC\Details.cshtml" />
     <Content Include="Views\MeetingNoteMVC\Edit.cshtml" />
     <Content Include="Views\MeetingNoteMVC\Index.cshtml" />
-    <Content Include="UploadFile\MM_Task_List_24-04.xlsx" />
-    <Content Include="UploadFile\MM_Task_List_24-04_danish.xlsx" />
+    <Content Include="UploadFile\30\MM_Task_List_24-04.xlsx" />
+    <Content Include="UploadFile\28\MM_Task_List_24-04_danish.xlsx" />
     <Content Include="Views\CommentMVC\Create.cshtml" />
     <Content Include="Views\CommentMVC\Delete.cshtml" />
     <Content Include="Views\CommentMVC\Details.cshtml" />
@@ -691,8 +691,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="UploadFile\300\" />
-    <Folder Include="UploadFile\30\" />
     <Folder Include="Views\FileUpload\" />
   </ItemGroup>
   <ItemGroup>
