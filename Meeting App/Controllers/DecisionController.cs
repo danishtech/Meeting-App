@@ -19,15 +19,15 @@ namespace Meeting_App.Controllers
         [Route("api/Decision/Search")]
         public IQueryable<Decision_Item> Search(string searchString)
         {
-            var meetings = from m in db.Decision_Items
+            var Decision = from m in db.Decision_Items
                            select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                meetings = meetings.Where(s => s.DecisionItem_Title.Contains(searchString));
+                Decision = Decision.Where(s => s.DecisionItem_Title.Contains(searchString));
             }
 
-            return meetings;
+            return Decision;
         }
         // GET: api/Decision
         public IQueryable<Decision_Item> GetDecision_Items()

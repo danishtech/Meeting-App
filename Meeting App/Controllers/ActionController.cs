@@ -19,15 +19,15 @@ namespace Meeting_App.Controllers
         [Route("api/Action/Search")]
         public IQueryable<Action_Item> Search(string searchString)
         {
-            var meetings = from m in db.Action_Items
+            var Actions = from m in db.Action_Items
                            select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                meetings = meetings.Where(s => s.ActionItem_Title.Contains(searchString));
+                Actions = Actions.Where(s => s.ActionItem_Title.Contains(searchString));
             }
 
-            return meetings;
+            return Actions;
         }
 
         // GET: api/Action
