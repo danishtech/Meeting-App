@@ -473,6 +473,11 @@
     <Content Include="forgotPassword.html" />
     <Content Include="Global.asax" />
     <Content Include="htmlTemplate.html" />
+    <Content Include="Meeting_Agenda_Changed.html" />
+    <Content Include="Meeting_cancellation.html" />
+    <Content Include="Meeting_Conclusion.html" />
+    <Content Include="Meeting_Invitation.html" />
+    <Content Include="Meeting_Reschedule.html" />
     <Content Include="Models\Meeting.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Meeting.Context.cs</LastGenOutput>

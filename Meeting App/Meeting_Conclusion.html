@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<style>
+body {
+  background-color: white;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+h3 {
+  width: 100%;
+  background-color: #36ac41;
+  color: black;
+  height: 50px;
+  text-align: center;
+  justify-content: center;
+  padding: 6px;
+}
+
+th {
+  padding: 20px;
+  background-color: #c8c8c8;
+  text-align: right;
+  width: 20%;
+  border: 1px solid black;
+}
+
+s {
+  background-color: #facccc;
+}
+
+a {
+  background-color: #d4facc;
+}
+
+tr td b{ color:green ;}
+</style>
+</head>
+<body>
+
+<div class="container">
+	<div class="row">
+		<h3>"Email Template" Conclusion</h3>
+		
+		
+		<table class="table table-bordered success">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<td>{{MeetingSubject}}</td>
+					</tr>
+					<tr>
+						<th class="info">Organizer</th>
+						<td>{{HostUser}}</td>
+					</tr>
+					<tr>
+						<th class="info">Agenda</th>
+						<td>{{meetingdescription}}</td>
+					</tr>
+					<tr>
+						<th class="info">Conclusion</th>
+						<td>{{Conclusion}}</td>
+					</tr>
+				</thead>
+
+			</table>
+	</div>
+</div>
+</body>
+</html>
