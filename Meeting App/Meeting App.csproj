@@ -477,6 +477,7 @@
     <Content Include="Meeting_cancellation.html" />
     <Content Include="Meeting_Conclusion.html" />
     <Content Include="Meeting_Invitation.html" />
+    <Content Include="Meeting_Reminder.html" />
     <Content Include="Meeting_Reschedule.html" />
     <Content Include="Models\Meeting.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

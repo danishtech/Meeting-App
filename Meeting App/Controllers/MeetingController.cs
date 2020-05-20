@@ -22,14 +22,38 @@ namespace Meeting_App.Controllers
         public IQueryable<Meeting> Search(string searchString)
         {
             var meetings = from m in db.Meetings
-                         select m;
+                           select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 meetings = meetings.Where(s => s.Meeting_Subject.Contains(searchString));
             }
 
-            return  meetings;
+            return meetings;
+        }
+
+
+        [HttpGet]
+        [Route("api/Meeting/SearchFilter")]
+        public IQueryable<Meeting> SearchFilter(string project, string createdby, int meetingStatus)
+        {
+            var meetings = from m in db.Meetings
+                           select m;
+
+            if (!String.IsNullOrEmpty(project))
+            {
+                meetings = meetings.Where(s => s.project_Name.Contains(project));
+            }
+            if (!String.IsNullOrEmpty(createdby))
+            {
+                meetings = meetings.Where(s => s.HostUser.Contains(createdby));
+            }
+            if (meetingStatus > -1 && meetingStatus < 3)
+            {
+                meetings = meetings.Where(s => s.Status == meetingStatus);
+            }
+
+            return meetings;
         }
 
         // GET: api/Meeting

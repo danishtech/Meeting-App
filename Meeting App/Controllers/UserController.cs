@@ -198,7 +198,7 @@ namespace Meeting_App.Controllers
                 foreach (string Multiemailid in Multi)
                 {
                     message.To.Add(new MailAddress(Multiemailid)); //  message.To.Add(new MailAddress(Multiname)); //adding multi reciver's Email Id
-                    message.Body = SendCancellationMeetingEmailBody(Multiname, objData["message"].ToString(), objData["MeetingSubject"].ToString(), objData["MeetingDate"].ToString(), objData["HostUser"].ToString(), objData["ShareLink"].ToString(), objData["MeetingDescription"].ToString(), objData["NewMeetingDate"].ToString());
+                    message.Body = SendCancellationMeetingEmailBody(Multiname, objData["message"].ToString(), objData["MeetingSubject"].ToString(), objData["MeetingDate"].ToString(), objData["HostUser"].ToString(), objData["ShareLink"].ToString(), objData["MeetingDescription"].ToString());
                     message.IsBodyHtml = true;
                     using (var smtp = new SmtpClient())
                     {
@@ -211,7 +211,7 @@ namespace Meeting_App.Controllers
             }
 
         }
-        private string SendCancellationMeetingEmailBody(string userName, string message, string subject, string MeetingDate, string HostUser, string ShareLink, string MeetingDescription, string NewMeetingDate)
+        private string SendCancellationMeetingEmailBody(string userName, string message, string subject, string MeetingDate, string HostUser, string ShareLink, string MeetingDescription)
         {
             string body = string.Empty;
             using (StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("/Meeting_cancellation.html")))
@@ -225,7 +225,7 @@ namespace Meeting_App.Controllers
             body = body.Replace("{{HostUser}}", HostUser);
             body = body.Replace("{{ShareLink}}", ShareLink);
             body = body.Replace("{{meetingdescription}}", MeetingDescription);
-            body = body.Replace("{{NewMeetingDate}}", NewMeetingDate);
+           // body = body.Replace("{{NewMeetingDate}}", NewMeetingDate);
             return body;
         }
 
