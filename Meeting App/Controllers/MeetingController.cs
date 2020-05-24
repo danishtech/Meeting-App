@@ -42,7 +42,7 @@ namespace Meeting_App.Controllers
 
             if (!String.IsNullOrEmpty(project))
             {
-                meetings = meetings.Where(s => s.project_Name.Equals(project.Trim().ToLower()));
+                meetings = meetings.Where(s => s.project_Name.Contains(project));
             }
             if (!String.IsNullOrEmpty(createdby))
             {

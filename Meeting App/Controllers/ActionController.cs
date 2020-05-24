@@ -29,6 +29,49 @@ namespace Meeting_App.Controllers
 
             return Actions;
         }
+        [HttpGet]
+        [Route("api/Action/SearchFilter")]
+        public IQueryable<Action_Item> SearchFilter(string project, string createdby, int Status,string Priority,DateTime due)
+        {
+            var Actions = from m in db.Action_Items
+                           select m;
+            //var Actions = (from p in db.Meetings
+            //               join e in db.Action_Items
+            //               on p.MeetingID equals e.MeetingID
+
+            //               select new
+            //               {
+
+            //                   ProjectName = e.project_Name,
+            //                   HostUser = p.HostUser,
+            //                   Priority = e.Priority,
+            //                   Status = e.Status,
+            //                   due = e.ActionDate
+            //               });
+
+            if (!String.IsNullOrEmpty(project))
+            {
+                Actions = Actions.Where(s => s.project_Name.Contains(project));
+            }
+            if (!String.IsNullOrEmpty(createdby))
+            {
+                Actions = Actions.Where(s => s.Meeting.HostUser.Equals(createdby.Trim().ToLower()));
+            }
+            if (Status > -1 && Status < 2)
+            {
+                Actions = Actions.Where(s => s.Status == Status);
+            }
+            if (!String.IsNullOrEmpty(Priority))
+            {
+                Actions = Actions.Where(s => s.Priority.Equals(Priority.Trim().ToLower()));
+            }
+            if (due != null)
+            {
+                Actions = Actions.Where(s => s.ActionDate.Value.Equals(due));
+                //DateTime.Compare(x.price_date.Value.Date, dt.Date) == 0)
+            }
+            return Actions;
+        }
 
         // GET: api/Action
         public IQueryable<Action_Item> GetAction_Items()

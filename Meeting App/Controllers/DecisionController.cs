@@ -29,6 +29,50 @@ namespace Meeting_App.Controllers
 
             return Decision;
         }
+
+        [HttpGet]
+        [Route("api/Decision/SearchFilter")]
+        public IQueryable<Decision_Item> SearchFilter(string project, string createdby, int Status, string Priority, DateTime due)
+        {
+            var Decisions = from m in db.Decision_Items
+                          select m;
+            //var Actions = (from p in db.Meetings
+            //               join e in db.Action_Items
+            //               on p.MeetingID equals e.MeetingID
+
+            //               select new
+            //               {
+
+            //                   ProjectName = e.project_Name,
+            //                   HostUser = p.HostUser,
+            //                   Priority = e.Priority,
+            //                   Status = e.Status,
+            //                   due = e.ActionDate
+            //               });
+
+            if (!String.IsNullOrEmpty(project))
+            {
+                Decisions = Decisions.Where(s => s.project_Name.Contains(project));
+            }
+            if (!String.IsNullOrEmpty(createdby))
+            {
+                Decisions = Decisions.Where(s => s.Meeting.HostUser.Equals(createdby.Trim().ToLower()));
+            }
+            if (Status > -1 && Status < 2)
+            {
+                Decisions = Decisions.Where(s => s.Status == Status);
+            }
+            if (!String.IsNullOrEmpty(Priority))
+            {
+                Decisions = Decisions.Where(s => s.Priority.Equals(Priority.Trim().ToLower()));
+            }
+            if (due != null)
+            {
+                Decisions = Decisions.Where(s => s.DecisionDate.Value.Equals(due));
+                //DateTime.Compare(x.price_date.Value.Date, dt.Date) == 0)
+            }
+            return Decisions;
+        }
         // GET: api/Decision
         public IQueryable<Decision_Item> GetDecision_Items()
         {
