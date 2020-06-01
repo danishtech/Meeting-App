@@ -14,7 +14,7 @@ namespace Meeting_App.Controllers
 {
     public class CommentController : ApiController
     {
-        private Meeting_AppEntities db = new Meeting_AppEntities();
+        private Virtual_StudyEntities db = new Virtual_StudyEntities();
 
         // GET: api/Comment
         public IQueryable<Comment> GetComments()

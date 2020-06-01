@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="943549f3aeea487ab4219b97ebdda207" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Action_Item" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AppUser" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Comment" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Decision_Item" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Meeting" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Meeting_Note" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Poll" Width="1.5" PointX="7.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PollOption" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Action_Item_Meeting" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Comment_Action_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Comment_Decision_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Comment_Meeting" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Decision_Item_Meeting" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_MeetingNotes_Meeting" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PollOption_PollOption" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.Role" Width="1.5" PointX="5.5" PointY="8.125" />
+        <AssociationConnector Association="Model.FK_AppUser_AppUser" />
+        <AssociationConnector Association="Model.FK_AppUser_Roles" />
+        <EntityTypeShape EntityType="Model.Attendance" Width="1.5" PointX="10" PointY="7" />
+        <AssociationConnector Association="Model.FK_Attendance_AppUser" />
+        <AssociationConnector Association="Model.FK_Attendance_Meeting" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

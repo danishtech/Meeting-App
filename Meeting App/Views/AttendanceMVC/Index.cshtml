@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Meeting_App.Models.Attendance>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AttendanceDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppUser.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Meeting.project_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AttendanceDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppUser.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Meeting.project_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AttendanceID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AttendanceID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AttendanceID })
+        </td>
+    </tr>
+}
+
+</table>

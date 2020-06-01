@@ -14,7 +14,7 @@ namespace Meeting_App.Controllers
 {
     public class ActionController : ApiController
     {
-        private Meeting_AppEntities db = new Meeting_AppEntities();
+        private Virtual_StudyEntities db = new Virtual_StudyEntities();
         [HttpGet]
         [Route("api/Action/Search")]
         public IQueryable<Action_Item> Search(string searchString)
@@ -31,7 +31,7 @@ namespace Meeting_App.Controllers
         }
         [HttpGet]
         [Route("api/Action/SearchFilter")]
-        public IQueryable<Action_Item> SearchFilter(string project, string createdby, int Status,string Priority,DateTime due)
+        public IQueryable<Action_Item> SearchFilter(string project, string createdby, int Status,string Priority)
         {
             var Actions = from m in db.Action_Items
                            select m;
@@ -65,11 +65,11 @@ namespace Meeting_App.Controllers
             {
                 Actions = Actions.Where(s => s.Priority.Equals(Priority.Trim().ToLower()));
             }
-            if (due != null)
-            {
-                Actions = Actions.Where(s => s.ActionDate.Value.Equals(due));
-                //DateTime.Compare(x.price_date.Value.Date, dt.Date) == 0)
-            }
+            //if (due != null)
+            //{
+            //    Actions = Actions.Where(s => s.ActionDate.Value.Equals(due));
+            //    //DateTime.Compare(x.price_date.Value.Date, dt.Date) == 0)
+            //}
             return Actions;
         }
 

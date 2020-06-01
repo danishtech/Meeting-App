@@ -12,7 +12,7 @@ namespace Meeting_App.Controllers
 {
     public class ActionMVCController : Controller
     {
-        private Meeting_AppEntities db = new Meeting_AppEntities();
+        private Virtual_StudyEntities db = new Virtual_StudyEntities();
 
         // GET: ActionMVC
         public ActionResult Index()

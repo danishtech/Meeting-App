@@ -14,7 +14,7 @@ namespace Meeting_App.Controllers
 {
     public class PollController : ApiController
     {
-        private Meeting_AppEntities db = new Meeting_AppEntities();
+        private Virtual_StudyEntities db = new Virtual_StudyEntities();
 
         // GET: api/Poll
         public IQueryable<Poll> GetPolls()

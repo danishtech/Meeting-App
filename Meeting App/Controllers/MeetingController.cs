@@ -15,7 +15,7 @@ namespace Meeting_App.Controllers
 {
     public class MeetingController : ApiController
     {
-        private Meeting_AppEntities db = new Meeting_AppEntities();
+        private Virtual_StudyEntities db = new Virtual_StudyEntities();
 
         [HttpGet]
         [Route("api/Meeting/Search")]

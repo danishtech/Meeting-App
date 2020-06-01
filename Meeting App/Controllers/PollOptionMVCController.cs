@@ -12,7 +12,7 @@ namespace Meeting_App.Controllers
 {
     public class PollOptionMVCController : Controller
     {
-        private Meeting_AppEntities db = new Meeting_AppEntities();
+        private Virtual_StudyEntities db = new Virtual_StudyEntities();
 
         // GET: PollOptionMVC
         public ActionResult Index()

@@ -14,6 +14,12 @@ namespace Meeting_App.Models
     
     public partial class AppUser
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AppUser()
+        {
+            this.Attendances = new HashSet<Attendance>();
+        }
+    
         public int AppUserID { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -40,5 +46,12 @@ namespace Meeting_App.Models
         public System.DateTime CreatedDate { get; set; }
         public int ModifiedByID { get; set; }
         public System.DateTime ModifiedDate { get; set; }
+        public Nullable<int> RoleId { get; set; }
+    
+        public virtual AppUser AppUser1 { get; set; }
+        public virtual AppUser AppUser2 { get; set; }
+        public virtual Role Role { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Attendance> Attendances { get; set; }
     }
 }
