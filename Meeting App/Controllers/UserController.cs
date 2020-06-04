@@ -325,10 +325,10 @@ namespace Meeting_App.Controllers
         }
         [HttpGet]
         [Route("api/User/UserAuthnticate")]
-        public bool UserExists(string Loginname, string password)
+        public bool UserExists(string Loginname, string password,int Role)
         {
             // string email = Convert.ToString(id);
-            bool userExists = db.AppUsers.Any(x => x.LoginName == Loginname && x.Password == password);
+            bool userExists = db.AppUsers.Any(x => x.LoginName == Loginname && x.Password == password && x.RoleId==Role);
 
             return userExists;
         }

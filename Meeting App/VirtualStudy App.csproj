@@ -397,6 +397,7 @@
     <Compile Include="Controllers\CommentMVCController.cs" />
     <Compile Include="Controllers\DecisionController.cs" />
     <Compile Include="Controllers\DecisionMVCController.cs" />
+    <Compile Include="Controllers\Decision_ItemController.cs" />
     <Compile Include="Controllers\FileShareController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

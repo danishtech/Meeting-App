@@ -12,7 +12,7 @@ namespace Meeting_App.Controllers
 {
     public class Decision_ItemController : Controller
     {
-        private Meeting_AppEntities db = new Meeting_AppEntities();
+        private Virtual_StudyEntities db = new Virtual_StudyEntities();
 
         // GET: Decision_Item
         public ActionResult Index()
