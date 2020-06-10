@@ -80,22 +80,7 @@ namespace Meeting_App.Controllers
             }
 
             db.Attendances.Add(attendance);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (AttendanceExists(attendance.AttendanceID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = attendance.AttendanceID }, attendance);
         }

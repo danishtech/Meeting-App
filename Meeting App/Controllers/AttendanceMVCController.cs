@@ -49,7 +49,7 @@ namespace Meeting_App.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AttendanceID,AppUserID,MeetingID,AttendanceDate")] Attendance attendance)
+        public ActionResult Create([Bind(Include = "AttendanceID,AppUserID,MeetingID,AttendanceDate,IsActive")] Attendance attendance)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Meeting_App.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AttendanceID,AppUserID,MeetingID,AttendanceDate")] Attendance attendance)
+        public ActionResult Edit([Bind(Include = "AttendanceID,AppUserID,MeetingID,AttendanceDate,IsActive")] Attendance attendance)
         {
             if (ModelState.IsValid)
             {

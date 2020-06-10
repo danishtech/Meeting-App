@@ -18,6 +18,7 @@ namespace Meeting_App.Models
         public Nullable<int> AppUserID { get; set; }
         public Nullable<int> MeetingID { get; set; }
         public Nullable<System.DateTime> AttendanceDate { get; set; }
+        public Nullable<int> IsActive { get; set; }
     
         public virtual AppUser AppUser { get; set; }
         public virtual Meeting Meeting { get; set; }

@@ -60,6 +60,7 @@
           <Property Name="AppUserID" Type="int" />
           <Property Name="MeetingID" Type="int" />
           <Property Name="AttendanceDate" Type="datetime" />
+          <Property Name="IsActive" Type="int" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -680,6 +681,7 @@
           <Property Name="AttendanceDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="AppUser" Relationship="Model.FK_Attendance_AppUser" FromRole="Attendance" ToRole="AppUser" />
           <NavigationProperty Name="Meeting" Relationship="Model.FK_Attendance_Meeting" FromRole="Attendance" ToRole="Meeting" />
+          <Property Name="IsActive" Type="Int32" />
         </EntityType>
         <Association Name="FK_Attendance_AppUser">
           <End Type="Model.AppUser" Role="AppUser" Multiplicity="0..1" />
@@ -863,6 +865,7 @@
           <EntitySetMapping Name="Attendances">
             <EntityTypeMapping TypeName="Model.Attendance">
               <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
                 <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
                 <ScalarProperty Name="AppUserID" ColumnName="AppUserID" />
