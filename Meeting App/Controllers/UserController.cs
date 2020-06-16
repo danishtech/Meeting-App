@@ -305,6 +305,91 @@ namespace Meeting_App.Controllers
             //body = body.Replace("{message}", message);
             return body;
         }
+        [HttpPost]
+        [Route("api/User/EnableUser")]
+        public async Task EnableUser([FromBody]JObject objData)
+        {
+            var message = new MailMessage();
+            message.To.Add(new MailAddress(objData["toname"].ToString() + " <" + objData["toemail"].ToString() + ">"));
+            message.From = new MailAddress("danish.tech@gmail.com");
+            message.Bcc.Add(new MailAddress("checkboxnoida@gmail.com"));
+            message.Subject = objData["subject"].ToString();
+            message.Body = CreateEmailEnableUser(objData["toname"].ToString(), objData["message"].ToString());
+            message.IsBodyHtml = true;
+            using (var smtp = new SmtpClient())
+            {
+                await smtp.SendMailAsync(message);
+                await Task.FromResult(0);
+            }
+        }
+        private string CreateEmailEnableUser(string userName, string message)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("/EnableUser.html")))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{UserName}", userName);
+            //body = body.Replace("{message}", message);
+            return body;
+        }
+
+        [HttpPost]
+        [Route("api/User/DisableUser")]
+        public async Task DisableUser([FromBody]JObject objData)
+        {
+            var message = new MailMessage();
+            message.To.Add(new MailAddress(objData["toname"].ToString() + " <" + objData["toemail"].ToString() + ">"));
+            message.From = new MailAddress("danish.tech@gmail.com");
+            message.Bcc.Add(new MailAddress("checkboxnoida@gmail.com"));
+            message.Subject = objData["subject"].ToString();
+            message.Body = CreateEmailDisableUser(objData["toname"].ToString(), objData["message"].ToString());
+            message.IsBodyHtml = true;
+            using (var smtp = new SmtpClient())
+            {
+                await smtp.SendMailAsync(message);
+                await Task.FromResult(0);
+            }
+        }
+        private string CreateEmailDisableUser(string userName, string message)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("/DisableUser.html")))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{UserName}", userName);
+            //body = body.Replace("{message}", message);
+            return body;
+        }
+        [HttpPost]
+        [Route("api/User/ActivateUser")]
+        public async Task ActivateUser([FromBody]JObject objData)
+        {
+            var message = new MailMessage();
+            message.To.Add(new MailAddress(objData["toname"].ToString() + " <" + objData["toemail"].ToString() + ">"));
+            message.From = new MailAddress("danish.tech@gmail.com");
+            message.Bcc.Add(new MailAddress("checkboxnoida@gmail.com"));
+            message.Subject = objData["subject"].ToString();
+            message.Body = CreateActivateUser(objData["toname"].ToString(), objData["message"].ToString());
+            message.IsBodyHtml = true;
+            using (var smtp = new SmtpClient())
+            {
+                await smtp.SendMailAsync(message);
+                await Task.FromResult(0);
+            }
+        }
+        private string CreateActivateUser(string userName, string message)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("/ActivateUser.html")))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{UserName}", userName);
+            //body = body.Replace("{message}", message);
+            return body;
+        }
         [HttpGet]
         [Route("api/User/UserExists")]
         public bool UserExists(string id)

@@ -469,6 +469,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ActivateUser.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="check.png" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -479,6 +480,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="DisableUser.html" />
+    <Content Include="EnableUser.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="forgotPassword.html" />
