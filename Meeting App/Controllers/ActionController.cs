@@ -31,7 +31,7 @@ namespace Meeting_App.Controllers
         }
         [HttpGet]
         [Route("api/Action/SearchFilter")]
-        public IQueryable<Action_Item> SearchFilter(string project, string createdby, int Status,string Priority,DateTime due)
+        public IQueryable<Action_Item> SearchFilter(string project, string createdby, int Status,string Priority)
         {
             var Actions = from m in db.Action_Items
                            select m;
@@ -57,7 +57,7 @@ namespace Meeting_App.Controllers
             {
                 Actions = Actions.Where(s => s.Meeting.HostUser.Equals(createdby.Trim().ToLower()));
             }
-            if (Status > -1 && Status < 2)
+            if (Status > -1 && Status < 3)
             {
                 Actions = Actions.Where(s => s.Status == Status);
             }
@@ -65,11 +65,11 @@ namespace Meeting_App.Controllers
             {
                 Actions = Actions.Where(s => s.Priority.Equals(Priority.Trim().ToLower()));
             }
-            if (due != null)
-            {
-                Actions = Actions.Where(s => s.ActionDate.Value.Equals(due));
-                //DateTime.Compare(x.price_date.Value.Date, dt.Date) == 0)
-            }
+            //if (due != null)
+            //{
+            //    Actions = Actions.Where(s => s.ActionDate.Value.Equals(due));
+            //    //DateTime.Compare(x.price_date.Value.Date, dt.Date) == 0)
+            //}
             return Actions;
         }
 

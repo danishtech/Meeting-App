@@ -101,6 +101,7 @@
           <Property Name="Status" Type="int" />
           <Property Name="HostUser" Type="varchar" MaxLength="50" />
           <Property Name="Conclusion" Type="varchar(max)" />
+          <Property Name="RoomKey" Type="bigint" />
         </EntityType>
         <EntityType Name="Meeting Notes">
           <Key>
@@ -336,11 +337,6 @@
           <EntitySet Name="Comments" EntityType="Model.Comment" />
           <EntitySet Name="Action_Items" EntityType="Model.Action_Item" />
           <EntitySet Name="Decision_Items" EntityType="Model.Decision_Item" />
-          <EntitySet Name="Meetings" EntityType="Model.Meeting" />
-          <AssociationSet Name="FK_Action_Item_Meeting" Association="Model.FK_Action_Item_Meeting">
-            <End Role="Meeting" EntitySet="Meetings" />
-            <End Role="Action_Item" EntitySet="Action_Items" />
-          </AssociationSet>
           <AssociationSet Name="FK_Comment_Action_Item" Association="Model.FK_Comment_Action_Item">
             <End Role="Action_Item" EntitySet="Action_Items" />
             <End Role="Comment" EntitySet="Comments" />
@@ -348,6 +344,11 @@
           <AssociationSet Name="FK_Comment_Decision_Item" Association="Model.FK_Comment_Decision_Item">
             <End Role="Decision_Item" EntitySet="Decision_Items" />
             <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <EntitySet Name="Meetings" EntityType="Model.Meeting" />
+          <AssociationSet Name="FK_Action_Item_Meeting" Association="Model.FK_Action_Item_Meeting">
+            <End Role="Meeting" EntitySet="Meetings" />
+            <End Role="Action_Item" EntitySet="Action_Items" />
           </AssociationSet>
           <AssociationSet Name="FK_Comment_Meeting" Association="Model.FK_Comment_Meeting">
             <End Role="Meeting" EntitySet="Meetings" />
@@ -408,8 +409,8 @@
           <Property Name="Status" Type="Int32" />
           <Property Name="Priority" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MeetingID" Type="Int32" />
-          <NavigationProperty Name="Meeting" Relationship="Model.FK_Action_Item_Meeting" FromRole="Action_Item" ToRole="Meeting" />
           <NavigationProperty Name="Comments" Relationship="Model.FK_Comment_Action_Item" FromRole="Action_Item" ToRole="Comment" />
+          <NavigationProperty Name="Meeting" Relationship="Model.FK_Action_Item_Meeting" FromRole="Action_Item" ToRole="Meeting" />
         </EntityType>
         <EntityType Name="Decision_Item">
           <Key>
@@ -428,6 +429,30 @@
           <NavigationProperty Name="Comments" Relationship="Model.FK_Comment_Decision_Item" FromRole="Decision_Item" ToRole="Comment" />
           <NavigationProperty Name="Meeting" Relationship="Model.FK_Decision_Item_Meeting" FromRole="Decision_Item" ToRole="Meeting" />
         </EntityType>
+        <Association Name="FK_Comment_Action_Item">
+          <End Type="Model.Action_Item" Role="Action_Item" Multiplicity="0..1" />
+          <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action_Item">
+              <PropertyRef Name="ActionItemID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="ActionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Decision_Item">
+          <End Type="Model.Decision_Item" Role="Decision_Item" Multiplicity="0..1" />
+          <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Decision_Item">
+              <PropertyRef Name="DecisionItemID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="DecisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="Meeting">
           <Key>
             <PropertyRef Name="MeetingID" />
@@ -452,6 +477,7 @@
           <NavigationProperty Name="Comments" Relationship="Model.FK_Comment_Meeting" FromRole="Meeting" ToRole="Comment" />
           <NavigationProperty Name="Decision_Item" Relationship="Model.FK_Decision_Item_Meeting" FromRole="Meeting" ToRole="Decision_Item" />
           <NavigationProperty Name="Meeting_Notes" Relationship="Model.FK_MeetingNotes_Meeting" FromRole="Meeting" ToRole="Meeting_Note" />
+          <Property Name="RoomKey" Type="Int64" />
         </EntityType>
         <Association Name="FK_Action_Item_Meeting">
           <End Type="Model.Meeting" Role="Meeting" Multiplicity="0..1" />
@@ -462,30 +488,6 @@
             </Principal>
             <Dependent Role="Action_Item">
               <PropertyRef Name="MeetingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comment_Action_Item">
-          <End Type="Model.Action_Item" Role="Action_Item" Multiplicity="0..1" />
-          <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Action_Item">
-              <PropertyRef Name="ActionItemID" />
-            </Principal>
-            <Dependent Role="Comment">
-              <PropertyRef Name="ActionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comment_Decision_Item">
-          <End Type="Model.Decision_Item" Role="Decision_Item" Multiplicity="0..1" />
-          <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Decision_Item">
-              <PropertyRef Name="DecisionItemID" />
-            </Principal>
-            <Dependent Role="Comment">
-              <PropertyRef Name="DecisionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -649,6 +651,7 @@
           <EntitySetMapping Name="Meetings">
             <EntityTypeMapping TypeName="Model.Meeting">
               <MappingFragment StoreEntitySet="Meeting">
+                <ScalarProperty Name="RoomKey" ColumnName="RoomKey" />
                 <ScalarProperty Name="Conclusion" ColumnName="Conclusion" />
                 <ScalarProperty Name="HostUser" ColumnName="HostUser" />
                 <ScalarProperty Name="Status" ColumnName="Status" />

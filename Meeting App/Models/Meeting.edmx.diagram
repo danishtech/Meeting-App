@@ -13,14 +13,14 @@
         <EntityTypeShape EntityType="Model.Comment" Width="1.5" PointX="8.25" PointY="4.875" />
         <EntityTypeShape EntityType="Model.Action_Item" Width="1.5" PointX="3" PointY="13.875" />
         <EntityTypeShape EntityType="Model.Decision_Item" Width="1.5" PointX="3" PointY="4.875" />
-        <EntityTypeShape EntityType="Model.Meeting" Width="1.5" PointX="0.75" PointY="6.125" />
-        <AssociationConnector Association="Model.FK_Action_Item_Meeting" />
         <AssociationConnector Association="Model.FK_Comment_Action_Item" />
         <AssociationConnector Association="Model.FK_Comment_Decision_Item" />
+        <EntityTypeShape EntityType="Model.Meeting" Width="1.5" PointX="0.75" PointY="8.625" />
+        <AssociationConnector Association="Model.FK_Action_Item_Meeting" />
         <AssociationConnector Association="Model.FK_Comment_Meeting" />
         <AssociationConnector Association="Model.FK_Decision_Item_Meeting" />
         <AssociationConnector Association="Model.FK_MeetingNotes_Meeting" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

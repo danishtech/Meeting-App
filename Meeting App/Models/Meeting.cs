@@ -39,6 +39,7 @@ namespace Meeting_App.Models
         public Nullable<int> Status { get; set; }
         public string HostUser { get; set; }
         public string Conclusion { get; set; }
+        public Nullable<long> RoomKey { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Action_Item> Action_Item { get; set; }

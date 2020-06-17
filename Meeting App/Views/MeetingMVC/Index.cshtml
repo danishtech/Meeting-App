@@ -56,6 +56,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Conclusion)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoomKey)
+        </th>
         <th></th>
     </tr>
 
@@ -105,6 +108,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Conclusion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoomKey)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.MeetingID }) |

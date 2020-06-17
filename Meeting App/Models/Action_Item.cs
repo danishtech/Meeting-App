@@ -31,8 +31,8 @@ namespace Meeting_App.Models
         public string Priority { get; set; }
         public Nullable<int> MeetingID { get; set; }
     
-        public virtual Meeting Meeting { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual Meeting Meeting { get; set; }
     }
 }
